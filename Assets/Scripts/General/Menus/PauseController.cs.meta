@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 3fb441ce18bcde647ad7e1636b594080
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pauseMenu: {instanceID: 0}
+  - spaceshipInUse: {fileID: 11400000, guid: 6b2aa7816ffb17d4a8b7b67b3f564280, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

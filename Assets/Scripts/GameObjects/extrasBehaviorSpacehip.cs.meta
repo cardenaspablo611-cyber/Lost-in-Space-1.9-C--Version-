@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bc9e5ecf2ead6874b814b4a74dc39ec8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - bulletExtraTexture: {fileID: 21300000, guid: 5fda900bc80f45442b768ad87d93ee52, type: 3}
+  - upSideDownExtraTexture: {fileID: 21300000, guid: b201c775063b2ef40b9875a93732f3f5, type: 3}
+  - barPrefab: {fileID: 7400508886569051735, guid: 7ac25d5fafd960143b38c1e454febc4e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

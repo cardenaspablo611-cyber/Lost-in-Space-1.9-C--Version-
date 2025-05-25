@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d4d7631d26f85dc41a4d10f566b5a354
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - childUpDown: {instanceID: 0}
+  - childRightLeft: {instanceID: 0}
+  - buttonControllerParent: {instanceID: 0}
+  - immunityBarPrefab: {instanceID: 0}
+  - bulletPrefab: {instanceID: 0}
+  - explosionPrefab: {fileID: 7752969780030309745, guid: 1256e9d98d64ac143b0b3aa76c96bf3b, type: 3}
+  - shieldChildObject: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

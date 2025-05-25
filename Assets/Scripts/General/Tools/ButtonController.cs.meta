@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 525548ea87d2d7c4e8623392a7734717
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - use: {fileID: 11400000, guid: 6b2aa7816ffb17d4a8b7b67b3f564280, type: 2}
+  - temporalAdvancements: {fileID: 11400000, guid: d8db44d62019b244a94af0e3a5b9bdd6, type: 2}
+  - Advancements: {fileID: 11400000, guid: f36a4931332873c42a3ce7d1ad2be887, type: 2}
+  - SpaceshipShopAnimation: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 42f4dfe2cd1482147a04bdf154560d9a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - MusicSettingsAdmin: {fileID: 11400000, guid: 751c97a8345ed8f4fb37cbc144b5f59a, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9493513b8e166a34592ea26f21a71681
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - enableSprite: {fileID: 21300000, guid: e3bbb14f83411d04ebf39e9e8a92546b, type: 3}
+  - disableSprite: {instanceID: 0}
+  - mouseOnTopSprite: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
