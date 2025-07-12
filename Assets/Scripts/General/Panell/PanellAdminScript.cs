@@ -38,8 +38,6 @@ public class PanellAdminScript : MonoBehaviour {
     private bool printFPS;
 
     // -- After Pause Counter -- //
-    private bool pauseCounterBool;
-
     private float changingNumberCooldownTime = 0.5f;
     private Cooldown changingNumberCooldown;
     public static bool startAfterCount;
@@ -194,7 +192,6 @@ public class PanellAdminScript : MonoBehaviour {
         changingNumberCooldown = new Cooldown(changingNumberCooldownTime);
         
         startAfterCount = true;
-        pauseCounterBool = false;
 
         printAfterPause();
     }

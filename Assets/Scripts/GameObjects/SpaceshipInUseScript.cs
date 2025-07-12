@@ -16,7 +16,7 @@ public class SpaceshipInUseScript : ScriptableObject {
         foreach (SpecificSpaceshipInformation spaceship in informationSpaceship) {
 
             if (spaceship.use) {
-                tagOfUsedSpaceship = spaceship.tag;
+                tagOfUsedSpaceship = spaceship.spaceshipTag;
                 break;
             }
         }

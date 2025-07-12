@@ -30,8 +30,6 @@ public class PlayerDataAdministratorScript : MonoBehaviour {
 
         AdvancementsText = $"Coins: {coins}\nBills: {bills}\nScore: {score}\nEnemies Down: {enemiesTakenDown}\nHits On Enemies: {hitsOnEnemies}";
 
-        Debug.Log(AdvancementsText);
-        
         Advancements.AddDataToPlayerData(temporalAdvancements);
         temporalAdvancements.resetStaticVariables();
     }   

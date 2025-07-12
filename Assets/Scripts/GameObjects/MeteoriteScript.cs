@@ -21,8 +21,6 @@ public class MeteoriteScript : MonoBehaviour {
     private int lives;
     private int livesFactor;
 
-    private bool isStarting = false;
-    
     private float rotationSpeed;
     private float minRotationSpeed = 20;
     private float maxRotationSpeed = 175;
@@ -254,7 +252,6 @@ public class MeteoriteScript : MonoBehaviour {
         Destroy(gameObject);
 
         createExplosionObject();
-        Debug.Log("Destroyed artificial meteorite");
         
         if (!inmortal) {
             createMoneyObject();
@@ -272,10 +269,6 @@ public class MeteoriteScript : MonoBehaviour {
 
         panell.addScore(amountPerMeteoriteDown);
         destroyArtificial = true;
-    }
-
-    public void isStartingFunction() {
-        isStarting = true;
     }
 
     public void gameIsBeingExecuted() {

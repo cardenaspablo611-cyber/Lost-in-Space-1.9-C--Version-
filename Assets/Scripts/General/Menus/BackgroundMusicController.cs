@@ -9,7 +9,6 @@ public class BackgroundMusicController : MonoBehaviour {
     [SerializeField] private Slider MusicVolumeSlider;
 
     private AudioSource audioSource;
-    private float transitionDuration = 0.5f;
 
     private float maxVolumeMusic;
     private float minVolumeMusic = 0f;

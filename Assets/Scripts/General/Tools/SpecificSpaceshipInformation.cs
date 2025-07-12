@@ -16,7 +16,7 @@ public class SpecificSpaceshipInformation : ScriptableObject {
     [HideInInspector] public string information;
 
     [Header("Buy and Use Stuff")]
-    public string tag;
+    public string spaceshipTag;
     public bool bought;
     public bool use;
 
@@ -36,7 +36,7 @@ public class SpecificSpaceshipInformation : ScriptableObject {
 
         information = $"Lives: {lives}\n\nSpeed: {speed}\n\nAttack: {attack}";
 
-        if (tag == "Normal Spaceship") {
+        if (spaceshipTag == "Normal Spaceship") {
             bought = true;
         }
     }

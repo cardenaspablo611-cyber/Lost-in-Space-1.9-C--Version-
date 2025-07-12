@@ -77,7 +77,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 ## Credits
-This project was completely coded by Pdro A. Cárdenas [Palomario](https://github.com/Palomario)
+This project was completely coded by Pedro A. Cárdenas [Palomario](https://github.com/Palomario)
 
 
 

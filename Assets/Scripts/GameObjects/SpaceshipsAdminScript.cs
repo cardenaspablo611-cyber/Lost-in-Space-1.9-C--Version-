@@ -5,16 +5,16 @@ using UnityEngine;
 public class SpaceshipsAdminScript : MonoBehaviour {
 
     [SerializeField] private SpaceshipInUseScript spaceshipInUse;
-    private string tag;
+    private string spaceshipTag;
     [SerializeField] private GameObject[] spaceshipsList;
 
     private void Awake() {
 
-        tag = spaceshipInUse.tagOfUsedSpaceship;
+        spaceshipTag = spaceshipInUse.tagOfUsedSpaceship;
 
         foreach (GameObject spaceship in spaceshipsList) {
 
-            if (spaceship.tag == tag) {
+            if (spaceship.tag == spaceshipTag) {
 
                 GameObject instantiatedSpaceship = Instantiate(spaceship, transform.position, Quaternion.identity) as GameObject;
             }

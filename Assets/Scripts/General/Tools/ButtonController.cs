@@ -124,7 +124,7 @@ public class ButtonController : MonoBehaviour {
 
         foreach (SpecificSpaceshipInformation spaceship in use.informationSpaceship) {
 
-            if (spaceship.tag == "Normal Spaceship") {
+            if (spaceship.spaceshipTag == "Normal Spaceship") {
 
                 spaceship.use = true;
                 spaceship.bought = true;

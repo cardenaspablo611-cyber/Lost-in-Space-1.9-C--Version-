@@ -12,7 +12,6 @@ public class AnimationScript : MonoBehaviour {
     private Cooldown cooldown;
 
     [SerializeField] private bool loop;
-    private bool animation = true;
     [SerializeField] private bool inShopMenu;
     [SerializeField] private bool autoDestroy;
     private float totalDurationTime; 
@@ -53,7 +52,7 @@ public class AnimationScript : MonoBehaviour {
 
     private void spriteAnimation() {
 
-        if (animation) {
+        if (GetComponent<Animation>()) {
             if (inShopMenu) {
                 SpaceshipAnimationInstance.changeFalse();
             }
@@ -67,7 +66,6 @@ public class AnimationScript : MonoBehaviour {
                     
                     if (!loop) {
 
-                        animation = false;
                         animationState = sprites.Length - 1;
 
                         
@@ -88,12 +86,10 @@ public class AnimationScript : MonoBehaviour {
         }
 
         if (loop) {
-            animation = true;
         } 
     }
 
     public void restartAnimation() {
-        animation = true;
         animationState = 0;
     }
 }

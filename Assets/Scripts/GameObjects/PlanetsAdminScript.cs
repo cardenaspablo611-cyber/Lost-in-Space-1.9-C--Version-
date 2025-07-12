@@ -8,7 +8,6 @@ public class PlanetsAdminScript : MonoBehaviour {
 
     // -- Generating the Planet -- //
     [SerializeField] private GameObject[] planets; 
-    private int chosenPlanetNumber = 0;
     public bool generateAnotherPlanet; 
     // -- The Order for the display of the planets: Destroied, Dessert, Tech, Electric, Octopus
     private int order = 0;
@@ -27,9 +26,6 @@ public class PlanetsAdminScript : MonoBehaviour {
     private bool generateAnotherMeteorite; // This changes with the time. To give come difficulty to the game.
 
     private bool isStartingGame = true;
-    private int positionOrder = 0;
-    //[SerializeField] private Vector3[] listOfMeteoritesStartingPosition;
-
 
     // -- Game built-in Functions -- //
 
@@ -109,7 +105,6 @@ public class PlanetsAdminScript : MonoBehaviour {
             meteorite.transform.SetParent(gameObject.transform);
 
             if (isStartingGame) {
-                meteorite.GetComponent<MeteoriteScript>().isStartingFunction();
                 meteorite.GetComponent<MeteoriteScript>().gameIsBeingExecuted();
                 
             }

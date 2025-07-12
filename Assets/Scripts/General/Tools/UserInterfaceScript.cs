@@ -30,9 +30,6 @@ public class UserInterfaceScript : MonoBehaviour {
 
     [SerializeField] private SpaceshipInUseScript spaceshipInUse;
 
-    private bool printProblem = false;
-
-
     private void Start() {
         
 
