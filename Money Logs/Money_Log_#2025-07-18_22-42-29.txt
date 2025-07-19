@@ -1,0 +1,70 @@
+[2025-07-18 22:42:29.603] GAME STARTED
+[2025-07-18 22:42:32.375] [MoneyScript] Money collected: 1
+[2025-07-18 22:42:32.376] [PanellAdminScript] addMoney called. Added: 1, New total money: 1
+[2025-07-18 22:42:32.382] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:42:33.793] [MoneyScript] Money collected: 1
+[2025-07-18 22:42:33.795] [PanellAdminScript] addMoney called. Added: 1, New total money: 2
+[2025-07-18 22:42:33.795] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:42:37.317] [MoneyScript] Money collected: 1
+[2025-07-18 22:42:37.319] [PanellAdminScript] addMoney called. Added: 1, New total money: 3
+[2025-07-18 22:42:37.321] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:42:41.141] [MoneyScript] Money collected: 1
+[2025-07-18 22:42:41.143] [PanellAdminScript] addMoney called. Added: 1, New total money: 4
+[2025-07-18 22:42:41.144] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:42:45.080] [MoneyScript] Money collected: 1
+[2025-07-18 22:42:45.082] [PanellAdminScript] addMoney called. Added: 1, New total money: 5
+[2025-07-18 22:42:45.083] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:42:50.823] [MoneyScript] Money collected: 1
+[2025-07-18 22:42:50.824] [PanellAdminScript] addMoney called. Added: 1, New total money: 6
+[2025-07-18 22:42:50.826] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:03.440] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:03.441] [PanellAdminScript] addMoney called. Added: 1, New total money: 7
+[2025-07-18 22:43:03.442] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:04.798] [MoneyScript] Money collected: 100
+[2025-07-18 22:43:04.799] [PanellAdminScript] addMoney called. Added: 100, New total money: 107
+[2025-07-18 22:43:04.802] [MoneyScript] Called panell.addMoney(100)
+[2025-07-18 22:43:05.754] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:05.756] [PanellAdminScript] addMoney called. Added: 1, New total money: 108
+[2025-07-18 22:43:05.756] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:09.138] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:09.139] [PanellAdminScript] addMoney called. Added: 1, New total money: 109
+[2025-07-18 22:43:09.140] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:10.294] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:10.297] [PanellAdminScript] addMoney called. Added: 1, New total money: 110
+[2025-07-18 22:43:10.297] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:11.377] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:11.378] [PanellAdminScript] addMoney called. Added: 1, New total money: 111
+[2025-07-18 22:43:11.380] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:19.280] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:19.281] [PanellAdminScript] addMoney called. Added: 1, New total money: 112
+[2025-07-18 22:43:19.281] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:20.782] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:20.784] [PanellAdminScript] addMoney called. Added: 1, New total money: 113
+[2025-07-18 22:43:20.784] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:22.140] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:22.142] [PanellAdminScript] addMoney called. Added: 1, New total money: 114
+[2025-07-18 22:43:22.143] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:23.398] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:23.400] [PanellAdminScript] addMoney called. Added: 1, New total money: 115
+[2025-07-18 22:43:23.400] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:23.619] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:23.621] [PanellAdminScript] addMoney called. Added: 1, New total money: 116
+[2025-07-18 22:43:23.622] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:24.460] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:24.462] [PanellAdminScript] addMoney called. Added: 1, New total money: 117
+[2025-07-18 22:43:24.463] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:24.558] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:24.559] [PanellAdminScript] addMoney called. Added: 1, New total money: 118
+[2025-07-18 22:43:24.560] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:28.237] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:28.238] [PanellAdminScript] addMoney called. Added: 1, New total money: 119
+[2025-07-18 22:43:28.239] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:39.160] [MoneyScript] Money collected: 1
+[2025-07-18 22:43:39.161] [PanellAdminScript] addMoney called. Added: 1, New total money: 120
+[2025-07-18 22:43:39.162] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:43:39.794] [PlayerDataAdministratorScript] Awake: temporalAdvancements: score=350, bills=1, coins=20
+[2025-07-18 22:43:39.795] [PlayerData] AddDataToPlayerData called. Before: bills=0, coins=1. Adding: bills=1, coins=20
+[2025-07-18 22:43:39.795] [PlayerData] AddDataToPlayerData complete. After: bills=1, coins=21
+[2025-07-18 22:43:39.797] [PlayerData] resetStaticVariables called. Before: score=350, bills=1, coins=20
+[2025-07-18 22:43:39.797] [PlayerData] resetStaticVariables complete. After: score=0, bills=0, coins=0
+[2025-07-18 22:43:39.798] [PlayerDataAdministratorScript] Awake: Advancements after add: bills=1, coins=21

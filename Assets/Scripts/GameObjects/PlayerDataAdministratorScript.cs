@@ -27,11 +27,13 @@ public class PlayerDataAdministratorScript : MonoBehaviour {
         int score = temporalAdvancements.score;
         int bills = temporalAdvancements.bills;
         int coins = temporalAdvancements.coins;
+        MoneyLogger.Log($"[PlayerDataAdministratorScript] Awake: temporalAdvancements: score={score}, bills={bills}, coins={coins}");
 
         AdvancementsText = $"Coins: {coins}\nBills: {bills}\nScore: {score}\nEnemies Down: {enemiesTakenDown}\nHits On Enemies: {hitsOnEnemies}";
 
         Advancements.AddDataToPlayerData(temporalAdvancements);
         temporalAdvancements.resetStaticVariables();
+        MoneyLogger.Log($"[PlayerDataAdministratorScript] Awake: Advancements after add: bills={Advancements.bills}, coins={Advancements.coins}");
     }   
 
     private void Start() {

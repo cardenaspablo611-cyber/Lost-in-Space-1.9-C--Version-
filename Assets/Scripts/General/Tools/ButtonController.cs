@@ -74,7 +74,7 @@ public class ButtonController : MonoBehaviour {
 
             int allMoneyWhatYouHave = 100 * money.bills + money.coins;
             int allMoneyThatItCost = 100 * spaceshipOpened.spaceshipInformation.bills + spaceshipOpened.spaceshipInformation.coins;
-
+            MoneyLogger.Log($"[ButtonController] Attempting to buy spaceship. Player money: {allMoneyWhatYouHave}, Cost: {allMoneyThatItCost}");
             if (allMoneyWhatYouHave - allMoneyThatItCost >= 0) {
 
                 spaceshipOpened.buyingSpaceship();
@@ -83,6 +83,7 @@ public class ButtonController : MonoBehaviour {
 
                 money.bills = (allMoneyWhatYouHave / 100);
                 money.coins = allMoneyWhatYouHave - money.bills * 100;
+                MoneyLogger.Log($"[ButtonController] Spaceship bought. Remaining money: bills={money.bills}, coins={money.coins}");
             }
 
         }
@@ -109,8 +110,10 @@ public class ButtonController : MonoBehaviour {
     }
 
     public void updateMoneyData() {
+        MoneyLogger.Log($"[ButtonController] updateMoneyData called. Advancements before: bills={Advancements.bills}, coins={Advancements.coins}. Adding temporal: bills={temporalAdvancements.bills}, coins={temporalAdvancements.coins}");
         Advancements.AddDataToPlayerData(temporalAdvancements);
         temporalAdvancements.resetStaticVariables();
+        MoneyLogger.Log($"[ButtonController] updateMoneyData complete. Advancements after: bills={Advancements.bills}, coins={Advancements.coins}");
     }
 
     public void changeType(int number) {

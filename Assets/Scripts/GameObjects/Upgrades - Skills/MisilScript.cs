@@ -20,7 +20,7 @@ public class MisilScript : MonoBehaviour {
         try {
             startingPositionSpace = F.GetScriptComponentName<SpaceParent>("Space - Parent").Start;
         } catch (Exception exception) {
-            Debug.Log(exception);
+            _ = exception; // Suppress unused variable warning
             startingPositionSpace = new Vector2 (0,750 / 2);
         }
         position = transform.position;

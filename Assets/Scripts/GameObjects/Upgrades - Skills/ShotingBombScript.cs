@@ -22,7 +22,7 @@ public class ShotingBombScript : MonoBehaviour {
         try {
             yLimit = GameObject.Find("Spaceship").GetComponent<SpaceshipScript>().Space.Start.y;
         } catch (Exception exception) {
-            Debug.Log(exception);
+            _ = exception;
             yLimit = 375f;
 
         }

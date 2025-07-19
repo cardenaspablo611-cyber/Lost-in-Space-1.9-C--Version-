@@ -117,6 +117,8 @@ public class SpaceshipScript : MonoBehaviour {
 
         //StartCoroutine(ShootWithCooldown());
 
+        MoneyLogger.StartNewGameSession();
+
     }
 
     void FixedUpdate() {

@@ -20,10 +20,6 @@ public class Functions {
         factor = givenFactor;
     }
 
-    public static void printSpeedFactor() {
-        Debug.Log(factor);
-    }
-
     public static float returnFactor() {
         return factor;
     }

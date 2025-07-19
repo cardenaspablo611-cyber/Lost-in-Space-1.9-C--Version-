@@ -29,7 +29,7 @@ public class ButtonUseBuyAdmin : MonoBehaviour {
             
         int allMoneyWhatYouHave = 100 * money.bills + money.coins; // Including all the money that you have in on variable to get the difference of the price
         int allMoneyThatItCost = 100 * spaceshipOpened.spaceshipInformation.bills + spaceshipOpened.spaceshipInformation.coins; // Getting all the money that it cost in one number
-
+        MoneyLogger.Log($"[ButtonUseBuyAdmin] Update: Player money={allMoneyWhatYouHave}, Spaceship cost={allMoneyThatItCost}, Bought={spaceshipOpened.spaceshipInformation.bought}, Use={spaceshipOpened.spaceshipInformation.use}");
         if (spaceshipOpened.spaceshipInformation.bought) {
 
             buyScript.changeButtonState("selected");

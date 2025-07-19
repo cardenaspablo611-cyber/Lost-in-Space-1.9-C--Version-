@@ -86,6 +86,12 @@ public class PanellAdminScript : MonoBehaviour {
 
     private void checksScore() {
 
+        if (scoreCooldown == null) {
+            
+            scoreCooldown = new OmegaCooldown(scoreCooldownTime);
+            return;
+        }
+
         if (scoreCooldown.coolDownOver()) {
             score += 1;
         }
@@ -148,6 +154,7 @@ public class PanellAdminScript : MonoBehaviour {
     public void addMoney(int price) {
         
         money += price;
+        MoneyLogger.Log($"[PanellAdminScript] addMoney called. Added: {price}, New total money: {money}");
     }
 
     public void addScore(int amount) {

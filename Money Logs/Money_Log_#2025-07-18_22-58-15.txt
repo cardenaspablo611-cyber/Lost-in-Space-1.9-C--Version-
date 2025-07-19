@@ -1,0 +1,499 @@
+[2025-07-18 22:58:15.144] GAME STARTED
+[2025-07-18 22:58:19.647] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:19.649] [PanellAdminScript] addMoney called. Added: 1, New total money: 1
+[2025-07-18 22:58:19.654] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:20.104] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:20.106] [PanellAdminScript] addMoney called. Added: 1, New total money: 2
+[2025-07-18 22:58:20.107] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:20.947] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:20.948] [PanellAdminScript] addMoney called. Added: 1, New total money: 3
+[2025-07-18 22:58:20.950] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:21.665] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:21.666] [PanellAdminScript] addMoney called. Added: 1, New total money: 4
+[2025-07-18 22:58:21.667] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:23.649] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:23.651] [PanellAdminScript] addMoney called. Added: 1, New total money: 5
+[2025-07-18 22:58:23.653] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:26.385] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:26.387] [PanellAdminScript] addMoney called. Added: 1, New total money: 6
+[2025-07-18 22:58:26.389] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:27.624] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:27.625] [PanellAdminScript] addMoney called. Added: 1, New total money: 7
+[2025-07-18 22:58:27.626] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:36.206] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:36.211] [PanellAdminScript] addMoney called. Added: 1, New total money: 8
+[2025-07-18 22:58:36.212] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:39.212] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:39.215] [PanellAdminScript] addMoney called. Added: 1, New total money: 9
+[2025-07-18 22:58:39.215] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:45.708] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:45.710] [PanellAdminScript] addMoney called. Added: 1, New total money: 10
+[2025-07-18 22:58:45.711] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:45.868] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:45.871] [PanellAdminScript] addMoney called. Added: 1, New total money: 11
+[2025-07-18 22:58:45.871] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:46.889] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:46.891] [PanellAdminScript] addMoney called. Added: 1, New total money: 12
+[2025-07-18 22:58:46.891] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:48.972] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:48.974] [PanellAdminScript] addMoney called. Added: 1, New total money: 13
+[2025-07-18 22:58:48.974] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:55.232] [MoneyScript] Money collected: 100
+[2025-07-18 22:58:55.235] [PanellAdminScript] addMoney called. Added: 100, New total money: 113
+[2025-07-18 22:58:55.235] [MoneyScript] Called panell.addMoney(100)
+[2025-07-18 22:58:56.290] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:56.293] [PanellAdminScript] addMoney called. Added: 1, New total money: 114
+[2025-07-18 22:58:56.294] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:56.590] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:56.591] [PanellAdminScript] addMoney called. Added: 1, New total money: 115
+[2025-07-18 22:58:56.593] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:58:56.727] [MoneyScript] Money collected: 1
+[2025-07-18 22:58:56.728] [PanellAdminScript] addMoney called. Added: 1, New total money: 116
+[2025-07-18 22:58:56.729] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:59:00.955] [MoneyScript] Money collected: 1
+[2025-07-18 22:59:00.956] [PanellAdminScript] addMoney called. Added: 1, New total money: 117
+[2025-07-18 22:59:00.957] [MoneyScript] Called panell.addMoney(1)
+[2025-07-18 22:59:06.445] [PlayerDataAdministratorScript] Awake: temporalAdvancements: score=84, bills=1, coins=17
+[2025-07-18 22:59:06.446] [PlayerData] AddDataToPlayerData called. Before: bills=0, coins=0. Adding: bills=1, coins=17
+[2025-07-18 22:59:06.447] [PlayerData] AddDataToPlayerData complete. After: bills=1, coins=17
+[2025-07-18 22:59:06.447] [PlayerData] resetStaticVariables called. Before: score=84, bills=1, coins=17
+[2025-07-18 22:59:06.449] [PlayerData] resetStaticVariables complete. After: score=0, bills=0, coins=0
+[2025-07-18 22:59:06.449] [PlayerDataAdministratorScript] Awake: Advancements after add: bills=1, coins=17
+[2025-07-18 22:59:14.077] [ButtonController] updateMoneyData called. Advancements before: bills=1, coins=17. Adding temporal: bills=0, coins=0
+[2025-07-18 22:59:14.078] [PlayerData] AddDataToPlayerData called. Before: bills=1, coins=17. Adding: bills=0, coins=0
+[2025-07-18 22:59:14.078] [PlayerData] AddDataToPlayerData complete. After: bills=1, coins=17
+[2025-07-18 22:59:14.079] [PlayerData] resetStaticVariables called. Before: score=0, bills=0, coins=0
+[2025-07-18 22:59:14.080] [PlayerData] resetStaticVariables complete. After: score=0, bills=0, coins=0
+[2025-07-18 22:59:14.081] [ButtonController] updateMoneyData complete. Advancements after: bills=1, coins=17
+[2025-07-18 22:59:17.486] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.487] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.520] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.521] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.528] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.531] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.566] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.568] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.582] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.583] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.592] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.593] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.603] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.604] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.614] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.616] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.624] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.626] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.635] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.636] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.645] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.646] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.655] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.656] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.666] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.667] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.679] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.680] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.690] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.691] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.702] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.703] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.713] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.714] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.721] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.723] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.732] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.733] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.743] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.745] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.754] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.756] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.763] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.766] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.776] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.777] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.786] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.787] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.795] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.797] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.807] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.808] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.815] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.819] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.841] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.842] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.852] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.854] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.862] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.863] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.873] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.873] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.882] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.883] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.892] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.893] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.902] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.904] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.913] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.914] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.922] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.923] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.932] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.935] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.945] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.946] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.953] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.955] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.963] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.965] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.975] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.977] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.985] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.986] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:17.995] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:17.996] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.005] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.006] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.015] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.016] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.025] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.026] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.035] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.036] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.044] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.046] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.056] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.058] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.066] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.068] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.078] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.079] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.088] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.090] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.098] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.099] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.107] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.110] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.120] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.121] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.130] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.131] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.139] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.141] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.149] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.150] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.159] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.160] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.170] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.170] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.179] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.181] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.188] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.190] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.200] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.201] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.210] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.211] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.219] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.219] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.229] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.230] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.240] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.241] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.248] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.250] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.259] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.259] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.268] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.270] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.279] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.280] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.289] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.290] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.299] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.299] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.309] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.310] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.320] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.322] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.328] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.331] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.338] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.340] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.349] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.350] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.360] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.361] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.369] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.370] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.379] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.379] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.388] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.390] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.399] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.400] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.409] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.410] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.419] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.420] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.428] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.429] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.440] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.442] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.448] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.450] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.460] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.461] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.469] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.471] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.479] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.481] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.489] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.491] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.499] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.501] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.511] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.512] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.521] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.522] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.530] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.531] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.540] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.542] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.552] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.554] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.561] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.562] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.570] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.571] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.585] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.585] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.591] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.593] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.612] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.613] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.622] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.624] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.631] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.633] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.642] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.643] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.652] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.653] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.663] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.665] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.673] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.675] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.682] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.685] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.693] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.695] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.704] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.705] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.713] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.715] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.724] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.725] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.734] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.736] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.744] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.745] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.755] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.757] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.765] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.766] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.776] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.777] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.787] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.788] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.795] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.797] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.808] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.808] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.817] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.819] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.827] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.830] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.838] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.840] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.847] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.849] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.858] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.860] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.867] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.869] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.877] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.878] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.887] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.887] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.895] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.897] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.905] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.907] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.915] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.916] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.924] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.926] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.934] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.935] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.943] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.945] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.954] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.956] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.964] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.964] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.974] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.974] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.983] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.985] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:18.992] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:18.993] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.002] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.004] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.012] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.013] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.022] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.023] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.032] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.033] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.043] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.046] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.053] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.054] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.064] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.065] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.074] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.077] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.088] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.089] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.098] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.099] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.109] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.110] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.119] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.121] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.131] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.132] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.141] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.142] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.152] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.153] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.163] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.164] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.173] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.174] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.184] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.190] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.199] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.201] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.210] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.211] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.219] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.220] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.230] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.231] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.241] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.242] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.251] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.252] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.262] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.262] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.272] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.273] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.282] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.283] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.293] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.295] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.304] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.305] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.314] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.315] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.324] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.325] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.335] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.338] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.344] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.346] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.356] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.357] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.365] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.366] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.376] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.377] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.384] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.386] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.396] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.397] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.405] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.406] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.415] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.416] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.426] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.427] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.436] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.438] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.447] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.449] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.458] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.459] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.469] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.471] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.480] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.480] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.490] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.492] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.501] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.503] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.512] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.513] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.523] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.525] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.535] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.537] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.546] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.547] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.557] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.558] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.570] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.572] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.579] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.579] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.590] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.590] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.599] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.602] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.609] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.610] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.619] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.620] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.628] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.629] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.639] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.640] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.648] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.649] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.658] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.659] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.666] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.668] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.677] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.678] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.686] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.686] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.695] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.696] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.705] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.707] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.722] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.724] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.731] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.732] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.742] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.744] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.751] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.752] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.761] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.762] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.770] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.771] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False
+[2025-07-18 22:59:19.789] [ShopPanellAdminScript] Update: bills=1, coins=17
+[2025-07-18 22:59:19.790] [ButtonUseBuyAdmin] Update: Player money=117, Spaceship cost=105, Bought=True, Use=False

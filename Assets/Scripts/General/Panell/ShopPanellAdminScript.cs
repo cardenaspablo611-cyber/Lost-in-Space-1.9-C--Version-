@@ -24,6 +24,7 @@ public class ShopPanellAdminScript : MonoBehaviour {
 
         billText.text = Advancements.bills.ToString();
         coinText.text = Advancements.coins.ToString();
+        MoneyLogger.Log($"[ShopPanellAdminScript] Update: bills={Advancements.bills}, coins={Advancements.coins}");
     }
     
 }
