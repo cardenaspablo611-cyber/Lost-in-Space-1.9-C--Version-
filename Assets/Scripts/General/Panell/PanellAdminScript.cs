@@ -1,3 +1,4 @@
+using System.Collections; // <-- Add this line
 using UnityEngine;
 using F = Functions;
 
@@ -21,21 +22,16 @@ public class PanellAdminScript : MonoBehaviour {
     [Header("-- Money --")]  // -- Money & Lives -- // 
     [SerializeField] private GameObject billPrefab;
     private int priceBill;
-    private int money;
-    public int Money { get { return money;}}
-    private int coins;
-    public int Coins { get { return coins;}}
-    private int bills;
-    public int Bills { get { return bills;}}
+
 
     private SpaceshipScript spaceship;
     private int spaceshipLives;
 
     // -- FPS -- // 
-    private float deltaTime = 0.0f;
     private int fps;
     private string FPS = "";
     private bool printFPS;
+    private UserInterfaceScript userInterface;
 
     // -- After Pause Counter -- //
     private float changingNumberCooldownTime = 0.5f;
@@ -54,12 +50,45 @@ public class PanellAdminScript : MonoBehaviour {
     [SerializeField] private SpaceshipInUseScript spaceshipInUse;
 
     // -- Score -- //
-    private int score;
-    public int Score { get { return score;}}
     private float scoreCooldownTime = 1f;
     private OmegaCooldown scoreCooldown;
 
+    private MoneyAdministratorScript moneyAdmin;
+
+    public int Score { 
+        get { 
+            var (score, _, _, _, _) = moneyAdmin.GetTemporalInfo();
+            return score;
+        }
+    }
+
+    public int Money { 
+        get { 
+            var (_, bills, coins, _, _) = moneyAdmin.GetTemporalInfo();
+            return bills * 100 + coins;
+        }
+    }
+    
+    public int Bills { 
+        get { 
+            var (_, bills, _, _, _) = moneyAdmin.GetTemporalInfo();
+            return bills;
+        }
+    }
+    
+    public int Coins { 
+        get { 
+            var (_, _, coins, _, _) = moneyAdmin.GetTemporalInfo();
+            return coins;
+        }
+    }
+
     private void Awake() {
+        moneyAdmin = FindFirstObjectByType<MoneyAdministratorScript>();
+        if (moneyAdmin == null)
+        {
+            Debug.LogError("MoneyAdministratorScript not found in the scene!");
+        }
 
         priceBill = F.GetScriptComponentGameObject<MoneyScript>(billPrefab).Price;
 
@@ -71,17 +100,22 @@ public class PanellAdminScript : MonoBehaviour {
 
         pauseText.text = "";
 
+        userInterface = F.GetScriptComponentName<UserInterfaceScript>("User Interface Object");
+
         scoreCooldown = new OmegaCooldown(scoreCooldownTime);
+        StartCoroutine(FPSUpdaterCoroutine());
     }
 
     private void Update() {
         afterpauseCounterBool();
         checksScore();
         calcualteLives();
-        calculateMoney();
-        calculateFrameRate();
         updateTimeTransition();
         printInPanells();
+        
+        if (userInterface.F3) {
+            printFPS = !printFPS;
+        }
     }
 
     private void checksScore() {
@@ -93,7 +127,8 @@ public class PanellAdminScript : MonoBehaviour {
         }
 
         if (scoreCooldown.coolDownOver()) {
-            score += 1;
+            var (currentScore, _, _, _, _) = moneyAdmin.GetTemporalInfo();
+            moneyAdmin.AddGameStats(1, 0, 0); // Add 1 to score
         }
     }
 
@@ -106,64 +141,64 @@ public class PanellAdminScript : MonoBehaviour {
         spaceshipLives = child.GetComponent<SpaceshipScript>().Lives; 
     }
 
-    private void calculateMoney() {
-
-        bills = (int)(money / priceBill);
-        coins = money - bills * priceBill;
-    }
-
-    private void calculateFrameRate() {
-
-        UserInterfaceScript userInterface = F.GetScriptComponentName<UserInterfaceScript>("User Interface Object");
-
-        if (userInterface.F3) {
-
-            printFPS = !printFPS;
-        }
-
-        if (printFPS) {
-
-            deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
-            fps = Mathf.RoundToInt(1.0f / deltaTime);
-
-            FPS = "FPS: " + fps.ToString();
-        } else {
-
-            FPS = "";
-        }   
-    }
-
     private void printInPanells() {
-
+        var (score, bills, coins, _, _) = moneyAdmin.GetTemporalInfo();
+        
         billText.text = bills.ToString();
         coinText.text = coins.ToString();
-        fpsText.text = FPS;
         scoreText.text = "Score: " + score.ToString();
+        fpsText.text = FPS.ToString();
 
         foreach (GameObject live in livesPanell) {
-
             live.gameObject.SetActive(false);
         }
 
         for (int i = 0; i <= spaceshipLives - 1; i++) {
-
             livesPanell[i].gameObject.SetActive(true);
         }
     }
 
     public void addMoney(int price) {
+        var (_, currentBills, currentCoins, _, _) = moneyAdmin.GetTemporalInfo();
         
-        money += price;
-        MoneyLogger.Log($"[PanellAdminScript] addMoney called. Added: {price}, New total money: {money}");
+        int newCoins = currentCoins + price;
+        
+        if (newCoins < 0) {
+            newCoins = 0;
+        }
+        
+        int additionalBills = newCoins / 100;
+        int remainingCoins = newCoins % 100;
+        
+        int newBills = currentBills + additionalBills;
+        
+        if (newBills < 0) {
+            newBills = 0;
+        }
+        
+        int billsToAdd = newBills - currentBills;
+        int coinsToAdd = remainingCoins - currentCoins;
+        
+        if (billsToAdd > 0) {
+            moneyAdmin.AddBills(billsToAdd);
+        }
+        if (coinsToAdd > 0) {
+            moneyAdmin.AddCoins(coinsToAdd);
+        }
+        
+        MoneyLogger.Log($"[PanellAdminScript] addMoney called. Added: {price}, New total: {newBills} bills, {remainingCoins} coins");
     }
 
     public void addScore(int amount) {
-
-        score += amount;
-
-        if (score < 0) {
-            score = 0;
+        var (currentScore, _, _, _, _) = moneyAdmin.GetTemporalInfo();
+        int newScore = currentScore + amount;
+        
+        if (newScore < 0) {
+            newScore = 0;
         }
+        
+        int scoreDifference = newScore - currentScore;
+        moneyAdmin.AddGameStats(scoreDifference, 0, 0);
     }
 
     private void afterpauseCounterBool() {
@@ -217,7 +252,19 @@ public class PanellAdminScript : MonoBehaviour {
         else if (pauseController == 0) {
             startAfterCount = false;
             pauseText.text = "";
-            // Time scale transition continues in updateTimeTransition until complete
+        }
+    }
+
+    private IEnumerator FPSUpdaterCoroutine() {
+        while (true) {
+            if (printFPS) {
+                float fpsValue = 1.0f / Time.unscaledDeltaTime;
+                fps = Mathf.RoundToInt(fpsValue);
+                FPS = "FPS: " + fps.ToString();
+            } else {
+                FPS = "";
+            }
+            yield return new WaitForSeconds(0.25f);
         }
     }
 }

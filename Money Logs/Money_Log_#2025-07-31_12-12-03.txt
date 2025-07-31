@@ -1,0 +1,20 @@
+[2025-07-31 12:12:03.011] GAME STARTED
+[2025-07-31 12:12:14.078] [MoneyScript] Money collected: 1
+[2025-07-31 12:12:14.082] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 2 coins
+[2025-07-31 12:12:14.087] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:12:18.649] [MoneyScript] Money collected: 1
+[2025-07-31 12:12:18.653] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 3 coins
+[2025-07-31 12:12:18.653] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:12:38.718] [MoneyScript] Money collected: 1
+[2025-07-31 12:12:38.721] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 4 coins
+[2025-07-31 12:12:38.721] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:12:41.373] [MoneyScript] Money collected: 1
+[2025-07-31 12:12:41.377] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 5 coins
+[2025-07-31 12:12:41.377] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:12:50.377] [MoneyScript] Money collected: 1
+[2025-07-31 12:12:50.381] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 6 coins
+[2025-07-31 12:12:50.381] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:13:13.973] [MoneyScript] Money collected: 1
+[2025-07-31 12:13:13.977] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 7 coins
+[2025-07-31 12:13:13.977] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:13:15.297] [PlayerDataAdministratorScript] Awake: temporalAdvancements: score=66, bills=0, coins=7

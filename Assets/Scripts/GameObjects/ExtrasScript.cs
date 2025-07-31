@@ -61,7 +61,8 @@ public class ExtrasScript : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Spaceship")) {
 
-            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Power Up");
+
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Collision Power Ups");
             
             spaceship.getExtras(name);
 

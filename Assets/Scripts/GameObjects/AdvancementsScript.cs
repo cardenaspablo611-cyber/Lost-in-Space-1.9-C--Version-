@@ -3,22 +3,25 @@ using F = Functions;
 
 public class AdvancementsScript : MonoBehaviour {
     
-    [SerializeField] private PlayerData temporalAdvancements;
+    private MoneyAdministratorScript moneyAdmin;
 
     private PanellAdminScript panell;
 
-    private void Awake() {
-
+    private void Start() {
+        moneyAdmin = FindFirstObjectByType<MoneyAdministratorScript>();
+        if (moneyAdmin == null)
+        {
+            Debug.LogError("MoneyAdministratorScript not found in the scene!");
+        }
         panell = F.GetScriptComponentName<PanellAdminScript>("Panell Object");
+        
     }
 
     private void FixedUpdate () {
-
-        temporalAdvancements.score = panell.Score;
-        temporalAdvancements.bills = panell.Bills;
-        temporalAdvancements.coins = panell.Coins;
-
-        temporalAdvancements.enemiesTakenDown = MeteoriteScript.meteoritesDown;
-        temporalAdvancements.hitsOnEnemies = MeteoriteScript.meteoritesHits;
+        var (score, bills, coins, enemiesTakenDown, hitsOnEnemies) = moneyAdmin.GetTemporalInfo();
+        // Only update enemies and hits, let PanellAdminScript handle score
+        moneyAdmin.AddGameStats(0, MeteoriteScript.meteoritesDown - enemiesTakenDown, MeteoriteScript.meteoritesHits - hitsOnEnemies);
+        moneyAdmin.AddBills(panell.Bills - bills);
+        moneyAdmin.AddCoins(panell.Coins - coins);
     }
 }

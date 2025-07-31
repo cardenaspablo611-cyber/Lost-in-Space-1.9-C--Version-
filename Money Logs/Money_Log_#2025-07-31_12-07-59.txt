@@ -1,0 +1,6 @@
+[2025-07-31 12:07:59.112] GAME STARTED
+[2025-07-31 12:08:03.885] [MoneyScript] Money collected: 1
+[2025-07-31 12:08:03.891] [PanellAdminScript] addMoney called. Added: 1, New total: 7 bills, 39 coins
+[2025-07-31 12:08:03.893] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:08:10.802] [PlayerDataAdministratorScript] Awake: temporalAdvancements: score=151, bills=7, coins=39
+[2025-07-31 12:08:39.446] [ButtonController] updateMoneyData called. Now handled by MoneyAdministratorScript.

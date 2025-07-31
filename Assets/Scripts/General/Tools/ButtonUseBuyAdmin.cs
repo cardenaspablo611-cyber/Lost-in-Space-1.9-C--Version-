@@ -10,7 +10,7 @@ public class ButtonUseBuyAdmin : MonoBehaviour {
     private DisableEnableButton buyScript;
     private DisableEnableButton useScript;
 
-    [SerializeField] private PlayerData money; // Current purse of the player
+    private MoneyAdministratorScript moneyAdmin;
 
     private SpaceshipsShopAnimationScript spaceshipAnimation; // Is where the opened spaceship is located
     private InformationSpaceshipsScript spaceshipOpened; // The opened spaceship object
@@ -21,14 +21,19 @@ public class ButtonUseBuyAdmin : MonoBehaviour {
 
         buyScript = buyButton.GetComponent<DisableEnableButton>();
         useScript = useButton.GetComponent<DisableEnableButton>();
+        moneyAdmin = FindFirstObjectByType<MoneyAdministratorScript>();
+        if (moneyAdmin == null) {
+            Debug.LogError("MoneyAdministratorScript not found in the scene!");
+        }
     }
 
     private void Update () {
         
         spaceshipOpened = spaceshipAnimation.openSpaceship.GetComponent<InformationSpaceshipsScript>();
-            
-        int allMoneyWhatYouHave = 100 * money.bills + money.coins; // Including all the money that you have in on variable to get the difference of the price
-        int allMoneyThatItCost = 100 * spaceshipOpened.spaceshipInformation.bills + spaceshipOpened.spaceshipInformation.coins; // Getting all the money that it cost in one number
+        
+        var (score, bills, coins, enemiesTakenDown, hitsOnEnemies) = moneyAdmin.GetGeneralInfo();
+        int allMoneyWhatYouHave = 100 * bills + coins; 
+        int allMoneyThatItCost = 100 * spaceshipOpened.spaceshipInformation.bills + spaceshipOpened.spaceshipInformation.coins; 
         MoneyLogger.Log($"[ButtonUseBuyAdmin] Update: Player money={allMoneyWhatYouHave}, Spaceship cost={allMoneyThatItCost}, Bought={spaceshipOpened.spaceshipInformation.bought}, Use={spaceshipOpened.spaceshipInformation.use}");
         if (spaceshipOpened.spaceshipInformation.bought) {
 

@@ -3,9 +3,6 @@ using System.Collections;
 
 public class PlayerDataAdministratorScript : MonoBehaviour {
 
-    [SerializeField] private PlayerData temporalAdvancements;
-    [SerializeField] private PlayerData Advancements;
-
     [SerializeField] private TextMesh shadow;
     [SerializeField] private GameObject shadowParent;
 
@@ -20,20 +17,21 @@ public class PlayerDataAdministratorScript : MonoBehaviour {
 
     private bool checkingForInterfiriences = false;
 
-    private void Awake() {
+    private MoneyAdministratorScript moneyAdmin;
 
-        int enemiesTakenDown = temporalAdvancements.enemiesTakenDown;
-        int hitsOnEnemies = temporalAdvancements.hitsOnEnemies;
-        int score = temporalAdvancements.score;
-        int bills = temporalAdvancements.bills;
-        int coins = temporalAdvancements.coins;
+    private void Awake() {
+        moneyAdmin = FindFirstObjectByType<MoneyAdministratorScript>();
+        if (moneyAdmin == null)
+        {
+            Debug.LogError("MoneyAdministratorScript not found in the scene!");
+        }
+
+        var (score, bills, coins, enemiesTakenDown, hitsOnEnemies) = moneyAdmin.GetTemporalInfo();
         MoneyLogger.Log($"[PlayerDataAdministratorScript] Awake: temporalAdvancements: score={score}, bills={bills}, coins={coins}");
 
         AdvancementsText = $"Coins: {coins}\nBills: {bills}\nScore: {score}\nEnemies Down: {enemiesTakenDown}\nHits On Enemies: {hitsOnEnemies}";
 
-        Advancements.AddDataToPlayerData(temporalAdvancements);
-        temporalAdvancements.resetStaticVariables();
-        MoneyLogger.Log($"[PlayerDataAdministratorScript] Awake: Advancements after add: bills={Advancements.bills}, coins={Advancements.coins}");
+        moneyAdmin.ResetTemporal();
     }   
 
     private void Start() {

@@ -41,7 +41,6 @@ public class MoneyScript : MonoBehaviour {
 
     private void FixedUpdate() {
 
-
         moneyMovement();
 
         checkOfLimit();
@@ -52,6 +51,7 @@ public class MoneyScript : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
 
         if (collision.gameObject.CompareTag("Spaceship")) {
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Collision Money Objects");
             MoneyLogger.Log($"[MoneyScript] Money collected: {price}");
             panell.addMoney(price);
             MoneyLogger.Log($"[MoneyScript] Called panell.addMoney({price})");

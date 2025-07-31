@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4397576489989638022}
   - component: {fileID: 9196696223680302011}
+  - component: {fileID: 839269924532278405}
   - component: {fileID: 4071495679194412574}
   m_Layer: 0
   m_Name: AudioManager
@@ -25,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2254554213690323785}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9196696223680302011
 MonoBehaviour:
@@ -48,7 +49,7 @@ MonoBehaviour:
   audioPlayerPrefab: {fileID: 1163304915640803798, guid: 67d50cf2f4ab9884a98a91546e398c71, type: 3}
   audioClips:
   - name: Shot 1
-    clip: {fileID: 8300000, guid: 42f2b787d45abb74b8059c49279ab34a, type: 3}
+    clip: {fileID: 8300000, guid: 02d1ccee7fd583f4a84056b402b031e3, type: 3}
   - name: Shot 2
     clip: {fileID: 8300000, guid: 16632aa5edf8122468dcce9239e12596, type: 3}
   - name: Shot 3
@@ -60,14 +61,36 @@ MonoBehaviour:
   - name: Door
     clip: {fileID: 8300000, guid: 23352479b166af74f9ec8ee05e6033ce, type: 3}
   - name: Explosion
-    clip: {fileID: 8300000, guid: 8cb86c714a1543d4ba4ef1e80cfd6dba, type: 3}
+    clip: {fileID: 8300000, guid: e6faaf0b9befe9c44a5f3dc611fce42f, type: 3}
   - name: HitOnEnemy
     clip: {fileID: 8300000, guid: 6d8fe55a72e01524c904f96b1c5e0b8a, type: 3}
   - name: Power Up
     clip: {fileID: 8300000, guid: 67422de07aa601344a32321e97a62129, type: 3}
   - name: Special Explosion
     clip: {fileID: 8300000, guid: f9fcffbe34b08c74b9650d1f872d6cde, type: 3}
+  - name: Collision Power Ups
+    clip: {fileID: 8300000, guid: 96bf08e045f708542a1034835b9de393, type: 3}
+  - name: Collision Money Objects
+    clip: {fileID: 8300000, guid: d1e44eb01d6aae245a04fc33f3aed25f, type: 3}
+  - name: Menu Object
+    clip: {fileID: 8300000, guid: 9b9fe22b2faa5ae4696b5473beda7fdf, type: 3}
+  - name: Button Clicked
+    clip: {fileID: 8300000, guid: d43d316f11102c34d83cbff50f6267e8, type: 3}
+  - name: Spaceship Getting Hit
+    clip: {fileID: 8300000, guid: 08aea9915225db14ebd0af455b511206, type: 3}
   musicSettings: {fileID: 11400000, guid: 751c97a8345ed8f4fb37cbc144b5f59a, type: 2}
+--- !u!114 &839269924532278405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2254554213690323785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6a8a34791ef0344ab7cefa8ec94892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &4071495679194412574
 AudioSource:
   m_ObjectHideFlags: 0
@@ -79,6 +102,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RectangleAdministrator : MonoBehaviour {
 
-    private float totalAnimationDuration = 0.5f;
+    private float totalAnimationDuration = 1f;
     
     [SerializeField] private float startingYPosition;
     [SerializeField] private float endingYPosition;

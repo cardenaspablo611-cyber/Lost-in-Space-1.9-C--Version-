@@ -5,9 +5,13 @@ using System.Collections.Generic;
 
 public class SpaceshipScript : MonoBehaviour {
 
+    [SerializeField] private SpecificSpaceshipInformation spaceshipInformation;
+
     private Vector2 position;
     private Vector2 startingPosition;
 
+    private float damageProbability = 1f;
+    public float DamageProbability { get { return damageProbability; } }
     private float speed = 10;
     private float currentSpeed;
     private float lateralMovement;
@@ -82,6 +86,7 @@ public class SpaceshipScript : MonoBehaviour {
     // Other //
 
     [SerializeField] private int maxLives;
+    [HideInInspector] public int MaxLives { get { return maxLives;}}
     [Range(1,4)]
     private int lives;
     [SerializeField] private GameObject gainHeartAnimationPrefab;
@@ -94,6 +99,7 @@ public class SpaceshipScript : MonoBehaviour {
 
     private PanellAdminScript panell;
     private int amountPerDeadth = -100;
+    private AudioManager audioManager;
 
     private void Awake() {
         upDown = childUpDown.GetComponent<SpriteRenderer>();
@@ -106,6 +112,9 @@ public class SpaceshipScript : MonoBehaviour {
         space = F.GetScriptComponentName<SpaceParent>("Space - Parent");
         admin = F.GetScriptComponentName<AdminScript>("Admin");
         panell = F.GetScriptComponentName<PanellAdminScript>("Panell Object");
+
+        speed *= (spaceshipInformation.speed / 30);
+        damageProbability *= spaceshipInformation.attack * 0.25f - 0.25f;
     }
 
     private void Start() {
@@ -118,6 +127,7 @@ public class SpaceshipScript : MonoBehaviour {
         //StartCoroutine(ShootWithCooldown());
 
         MoneyLogger.StartNewGameSession();
+        audioManager = FindFirstObjectByType<AudioManager>();
 
     }
 
@@ -355,6 +365,9 @@ public class SpaceshipScript : MonoBehaviour {
 
     public void gotHitten() {
         if (!inmunity) {
+            
+            audioManager.PlayEffect("Spaceship Getting Hit");
+
             if (!shield) {
 
                 panell.addScore(amountPerDeadth);
@@ -366,8 +379,6 @@ public class SpaceshipScript : MonoBehaviour {
                     rightLeft.sprite = null;
                     upDown.sprite = null;
                     GetComponent<SpriteRenderer>().sprite = null;
-
-                    //StartCoroutine(SmoothTimeScaleChange());
 
                     if (!deadth) {
                         GameObject explosion = Instantiate(explosionPrefab) as GameObject;

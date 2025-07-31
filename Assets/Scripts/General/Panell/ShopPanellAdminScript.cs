@@ -6,7 +6,7 @@ public class ShopPanellAdminScript : MonoBehaviour {
     [SerializeField] private GameObject billPanell;
     [SerializeField] private GameObject coinPanell;
 
-    [SerializeField] private PlayerData Advancements;
+    private MoneyAdministratorScript moneyAdmin;
 
     private TextMesh billText;
     private TextMesh coinText;
@@ -18,13 +18,18 @@ public class ShopPanellAdminScript : MonoBehaviour {
 
         billText = billPanell.GetComponentInChildren<TextMesh>();
         coinText = coinPanell.GetComponentInChildren<TextMesh>();
+        moneyAdmin = FindFirstObjectByType<MoneyAdministratorScript>();
+        if (moneyAdmin == null)
+        {
+            Debug.LogError("MoneyAdministratorScript not found in the scene!");
+        }
     }
 
     private void Update() {
-
-        billText.text = Advancements.bills.ToString();
-        coinText.text = Advancements.coins.ToString();
-        MoneyLogger.Log($"[ShopPanellAdminScript] Update: bills={Advancements.bills}, coins={Advancements.coins}");
+        var (_, bills, coins, _, _) = moneyAdmin.GetGeneralInfo();
+        billText.text = bills.ToString();
+        coinText.text = coins.ToString();
+        MoneyLogger.Log($"[ShopPanellAdminScript] Update: bills={bills}, coins={coins}");
     }
     
 }

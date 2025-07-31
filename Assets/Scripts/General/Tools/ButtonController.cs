@@ -7,13 +7,28 @@ public class ButtonController : MonoBehaviour {
 
     public SpaceshipInUseScript use;
 
-    [SerializeField] private PlayerData temporalAdvancements;
-    [SerializeField] private PlayerData Advancements;
+    private MoneyAdministratorScript moneyAdmin;
+    private AudioManager audioManager;
     
     [SerializeField] private GameObject SpaceshipShopAnimation;
     [SerializeField] private SpecificSpaceshipInformation[] spaceships;
 
     [SerializeField] private SceneData sceneData;
+
+    private void Start()
+    {
+        moneyAdmin = FindFirstObjectByType<MoneyAdministratorScript>();
+        if (moneyAdmin == null)
+        {
+            Debug.LogError("MoneyAdministratorScript not found in the scene!");
+        }
+        
+        audioManager = FindFirstObjectByType<AudioManager>();
+        if (audioManager == null)
+        {
+            Debug.LogError("AudioManager not found in the scene!");
+        }
+    }
 
     public void LoadScene(string sceneName) {
 
@@ -46,7 +61,7 @@ public class ButtonController : MonoBehaviour {
 
         backgroundMusic.GetComponent<BackgroundMusicController>().fadeOut();
 
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1.2f);
 
         SceneManager.LoadScene(sceneName);
     }
@@ -68,22 +83,22 @@ public class ButtonController : MonoBehaviour {
         SpaceshipsShopAnimationScript spaceshipAnimation = F.GetScriptComponentName<SpaceshipsShopAnimationScript>("Spaceship Animations");
 
         InformationSpaceshipsScript spaceshipOpened = spaceshipAnimation.openSpaceship.GetComponent<InformationSpaceshipsScript>();
-        PlayerData money = spaceshipAnimation.currentState;
 
         if (!spaceshipOpened.spaceshipInformation.bought) {
 
-            int allMoneyWhatYouHave = 100 * money.bills + money.coins;
+            var (score, bills, coins, enemiesTakenDown, hitsOnEnemies) = moneyAdmin.GetGeneralInfo();
+            int allMoneyWhatYouHave = 100 * bills + coins;
             int allMoneyThatItCost = 100 * spaceshipOpened.spaceshipInformation.bills + spaceshipOpened.spaceshipInformation.coins;
             MoneyLogger.Log($"[ButtonController] Attempting to buy spaceship. Player money: {allMoneyWhatYouHave}, Cost: {allMoneyThatItCost}");
             if (allMoneyWhatYouHave - allMoneyThatItCost >= 0) {
 
                 spaceshipOpened.buyingSpaceship();
 
-                allMoneyWhatYouHave -= allMoneyThatItCost;
+                moneyAdmin.SubtractBills(spaceshipOpened.spaceshipInformation.bills);
+                moneyAdmin.SubtractCoins(spaceshipOpened.spaceshipInformation.coins);
 
-                money.bills = (allMoneyWhatYouHave / 100);
-                money.coins = allMoneyWhatYouHave - money.bills * 100;
-                MoneyLogger.Log($"[ButtonController] Spaceship bought. Remaining money: bills={money.bills}, coins={money.coins}");
+                var (afterScore, afterBills, afterCoins, afterEnemiesTakenDown, afterHitsOnEnemies) = moneyAdmin.GetGeneralInfo();
+                MoneyLogger.Log($"[ButtonController] Spaceship bought. Remaining money: bills={afterBills}, coins={afterCoins}");
             }
 
         }
@@ -110,10 +125,9 @@ public class ButtonController : MonoBehaviour {
     }
 
     public void updateMoneyData() {
-        MoneyLogger.Log($"[ButtonController] updateMoneyData called. Advancements before: bills={Advancements.bills}, coins={Advancements.coins}. Adding temporal: bills={temporalAdvancements.bills}, coins={temporalAdvancements.coins}");
-        Advancements.AddDataToPlayerData(temporalAdvancements);
-        temporalAdvancements.resetStaticVariables();
-        MoneyLogger.Log($"[ButtonController] updateMoneyData complete. Advancements after: bills={Advancements.bills}, coins={Advancements.coins}");
+        // This method is now handled by MoneyAdministratorScript, so you may not need this anymore.
+        // If you need to transfer or reset money, use the appropriate methods from moneyAdmin.
+        MoneyLogger.Log("[ButtonController] updateMoneyData called. Now handled by MoneyAdministratorScript.");
     }
 
     public void changeType(int number) {
@@ -122,8 +136,9 @@ public class ButtonController : MonoBehaviour {
 
     public void resetAllData() {
 
-        temporalAdvancements.resetStaticVariables();
-        Advancements.resetStaticVariables();
+        // If you want to reset money, use moneyAdmin.ResetTemporal() and moneyAdmin.ResetGeneral()
+        moneyAdmin.ResetTemporal();
+        moneyAdmin.ResetGeneral();
 
         foreach (SpecificSpaceshipInformation spaceship in use.informationSpaceship) {
 
@@ -139,5 +154,9 @@ public class ButtonController : MonoBehaviour {
         }
 
         use.tagOfUsedSpaceship = "Normal Spaceship";
+    }
+
+    public void playButtonAudio() {
+        audioManager.PlayEffect("Button Clicked");
     }
 }

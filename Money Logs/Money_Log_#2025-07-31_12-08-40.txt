@@ -1,0 +1,77 @@
+[2025-07-31 12:08:40.933] GAME STARTED
+[2025-07-31 12:08:46.242] [MoneyScript] Money collected: 1
+[2025-07-31 12:08:46.246] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 1 coins
+[2025-07-31 12:08:46.251] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:08:48.351] [MoneyScript] Money collected: 1
+[2025-07-31 12:08:48.354] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 2 coins
+[2025-07-31 12:08:48.354] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:08:50.033] [MoneyScript] Money collected: 1
+[2025-07-31 12:08:50.036] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 3 coins
+[2025-07-31 12:08:50.037] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:08:50.190] [MoneyScript] Money collected: 1
+[2025-07-31 12:08:50.194] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 4 coins
+[2025-07-31 12:08:50.194] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:08:55.383] [MoneyScript] Money collected: 1
+[2025-07-31 12:08:55.387] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 5 coins
+[2025-07-31 12:08:55.387] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:00.666] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:00.669] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 6 coins
+[2025-07-31 12:09:00.669] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:01.031] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:01.035] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 7 coins
+[2025-07-31 12:09:01.036] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:04.142] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:04.146] [PanellAdminScript] addMoney called. Added: 1, New total: 0 bills, 8 coins
+[2025-07-31 12:09:04.148] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:06.047] [MoneyScript] Money collected: 100
+[2025-07-31 12:09:06.050] [PanellAdminScript] addMoney called. Added: 100, New total: 1 bills, 8 coins
+[2025-07-31 12:09:06.050] [MoneyScript] Called panell.addMoney(100)
+[2025-07-31 12:09:08.407] [MoneyScript] Money collected: 100
+[2025-07-31 12:09:08.410] [PanellAdminScript] addMoney called. Added: 100, New total: 2 bills, 8 coins
+[2025-07-31 12:09:08.410] [MoneyScript] Called panell.addMoney(100)
+[2025-07-31 12:09:16.144] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:16.148] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 9 coins
+[2025-07-31 12:09:16.148] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:16.726] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:16.729] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 10 coins
+[2025-07-31 12:09:16.729] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:17.918] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:17.922] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 11 coins
+[2025-07-31 12:09:17.923] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:18.257] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:18.264] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 12 coins
+[2025-07-31 12:09:18.265] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:42.433] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:42.437] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 13 coins
+[2025-07-31 12:09:42.437] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:43.348] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:43.351] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 14 coins
+[2025-07-31 12:09:43.352] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:44.510] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:44.515] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 15 coins
+[2025-07-31 12:09:44.515] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:46.947] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:46.950] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 16 coins
+[2025-07-31 12:09:46.951] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:47.946] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:47.949] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 17 coins
+[2025-07-31 12:09:47.949] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:49.323] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:49.325] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 18 coins
+[2025-07-31 12:09:49.327] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:55.423] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:55.426] [PanellAdminScript] addMoney called. Added: 1, New total: 2 bills, 19 coins
+[2025-07-31 12:09:55.426] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:57.069] [MoneyScript] Money collected: 100
+[2025-07-31 12:09:57.071] [PanellAdminScript] addMoney called. Added: 100, New total: 3 bills, 19 coins
+[2025-07-31 12:09:57.072] [MoneyScript] Called panell.addMoney(100)
+[2025-07-31 12:09:57.847] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:57.851] [PanellAdminScript] addMoney called. Added: 1, New total: 3 bills, 20 coins
+[2025-07-31 12:09:57.851] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:09:58.927] [MoneyScript] Money collected: 1
+[2025-07-31 12:09:58.931] [PanellAdminScript] addMoney called. Added: 1, New total: 3 bills, 21 coins
+[2025-07-31 12:09:58.932] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:10:00.056] [MoneyScript] Money collected: 1
+[2025-07-31 12:10:00.059] [PanellAdminScript] addMoney called. Added: 1, New total: 3 bills, 22 coins
+[2025-07-31 12:10:00.059] [MoneyScript] Called panell.addMoney(1)
+[2025-07-31 12:10:00.722] [PlayerDataAdministratorScript] Awake: temporalAdvancements: score=601, bills=3, coins=22

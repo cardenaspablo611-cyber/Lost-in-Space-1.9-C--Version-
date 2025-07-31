@@ -90,15 +90,22 @@ public class MeteoriteScript : MonoBehaviour {
             if (collision.gameObject.CompareTag("Bullet")) {
                 meteoritesHits += 1;
 
+                if (lives != 1 && F.randomFloatFromCero(1) < spaceship.DamageProbability) {
+                    lives -= 1;
+                    meteoritesHits += 1;
+                }
+
                 if (lives == 1) {
                     // Final hit - will trigger explosion sound through ExplosionScript
+
+                    
                     meteoritesDown += 1;
                     panell.addScore(amountPerMeteoriteDown);
                     destroyArtificial = true;
                 } else {
                     // Just damage - play hit sound
                     GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("HitOnEnemy");
-                    lives -= 1;
+                    lives -= 1;   
                 }
             }
 
