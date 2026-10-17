@@ -25,11 +25,21 @@ public class ShopPanellAdminScript : MonoBehaviour {
         }
     }
 
+    private int lastBills = -1;
+    private int lastCoins = -1;
+
     private void Update() {
         var (_, bills, coins, _, _) = moneyAdmin.GetGeneralInfo();
+        
+        // Only log when money changes, not every frame
+        if (bills != lastBills || coins != lastCoins) {
+            MoneyLogger.Log($"[ShopPanellAdminScript] Money updated: bills={bills}, coins={coins}");
+            lastBills = bills;
+            lastCoins = coins;
+        }
+        
         billText.text = bills.ToString();
         coinText.text = coins.ToString();
-        MoneyLogger.Log($"[ShopPanellAdminScript] Update: bills={bills}, coins={coins}");
     }
     
 }
