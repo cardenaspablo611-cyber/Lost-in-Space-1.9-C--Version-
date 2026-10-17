@@ -16,19 +16,17 @@ public class MoneyAdministratorScript : MonoBehaviour {
     // This replaces File IO to support WebGL and ensures data only persists during play session
     private static GameData temporalData = new GameData();
     private static GameData generalData = new GameData();
-    private static bool isInitialized = false;
 
     [SerializeField] private GameObject scoreTextPrefab;
     [HideInInspector] public GameObject ScoreTextPrefab { get { return scoreTextPrefab;}}
 
-
-    private void Awake() {
-        // Initialize data only once per session
-        if (!isInitialized) {
-            temporalData = new GameData();
-            generalData = new GameData();
-            isInitialized = true;
-        }
+    /// <summary>
+    /// Called by SessionStateManager at game launch to reset all money data.
+    /// Ensures Editor and builds start with clean state.
+    /// </summary>
+    public static void ResetSessionData() {
+        temporalData = new GameData();
+        generalData = new GameData();
     }
 
     private void SaveGameData(GameData data, bool isTemporal) {
