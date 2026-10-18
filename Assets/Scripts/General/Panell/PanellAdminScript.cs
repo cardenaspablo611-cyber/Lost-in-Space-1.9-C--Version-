@@ -129,7 +129,7 @@ public class PanellAdminScript : MonoBehaviour {
 
         if (scoreCooldown.coolDownOver()) {
             var (currentScore, _, _, _, _) = moneyAdmin.GetTemporalInfo();
-            moneyAdmin.AddGameStats(1, 0, 0); // Add 1 to score
+            moneyAdmin.AddGameStats(1 * scoreMultiplier, 0, 0); // Add 1 to score (x2 while upSideDown is active)
         }
     }
 
