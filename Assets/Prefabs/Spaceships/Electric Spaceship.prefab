@@ -140,7 +140,7 @@ MonoBehaviour:
   nameOfBullet: Shot 5
   shieldChildObject: {fileID: 4319522594930551145}
   maxLives: 3
-  gainHeartAnimationPrefab: {fileID: 311435827167155410, guid: 51e40f84d295fe54d825f56ce2867d95, type: 3}
+  gainHeartAnimationPrefab: {fileID: 311435827167155410, guid: 8f7e6d5c4b3a2918271605948372615a, type: 3}
 --- !u!114 &8699517207826410474
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -113,8 +113,20 @@ public class SpaceshipScript : MonoBehaviour {
         admin = F.GetScriptComponentName<AdminScript>("Admin");
         panell = F.GetScriptComponentName<PanellAdminScript>("Panell Object");
 
+        if (spaceshipInformation == null) {
+            Debug.LogError($"[SpaceshipScript] spaceshipInformation is NULL on {gameObject.name}! Spaceship will not move.");
+            return;
+        }
+
+        float baseSpeed = speed;
         speed *= (spaceshipInformation.speed / 30);
         damageProbability *= spaceshipInformation.attack * 0.25f - 0.25f;
+
+        Debug.Log($"[SpaceshipScript] {spaceshipInformation.spaceshipTag} initialized: base speed {baseSpeed} * ({spaceshipInformation.speed}/30) = {speed}");
+        
+        if (speed <= 0) {
+            Debug.LogWarning($"[SpaceshipScript] {spaceshipInformation.spaceshipTag} has speed <= 0! Check ScriptableObject asset file.");
+        }
     }
 
     private void Start() {
