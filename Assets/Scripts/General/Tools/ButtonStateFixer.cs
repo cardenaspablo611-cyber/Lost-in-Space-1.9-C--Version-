@@ -8,25 +8,47 @@ public class ButtonStateFixer : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private Sprite highlightedSprite;
     
     private Image buttonImage;
+    private bool isHovering = false;
     
     private void Start() {
         buttonImage = GetComponent<Image>();
-        
-        // Set initial sprite
-        if (buttonImage != null && normalSprite != null) {
-            buttonImage.sprite = normalSprite;
-        }
+        ResetToNormal();
+    }
+
+    private void OnEnable() {
+        ResetToNormal();
+        DeselectButton();
+    }
+
+    private void OnDisable() {
+        isHovering = false;
     }
     
     public void OnPointerEnter(PointerEventData eventData) {
+        isHovering = true;
         if (buttonImage != null && highlightedSprite != null) {
             buttonImage.sprite = highlightedSprite;
         }
     }
     
     public void OnPointerExit(PointerEventData eventData) {
+        isHovering = false;
+        ResetToNormal();
+    }
+
+    public void OnClick() {
+        DeselectButton();
+    }
+
+    private void ResetToNormal() {
         if (buttonImage != null && normalSprite != null) {
             buttonImage.sprite = normalSprite;
+        }
+    }
+
+    private void DeselectButton() {
+        if (EventSystem.current != null) {
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 } 

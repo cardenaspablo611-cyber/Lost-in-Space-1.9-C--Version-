@@ -138,6 +138,8 @@ public class PlanetsAdminScript : MonoBehaviour {
 
         tagOfSpawnedPlanet = planets[order].tag;
 
+        StarsScript.SetPlanetIndex(order);
+
         order += 1;
 
         if (order == planets.Length) {
