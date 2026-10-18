@@ -260,8 +260,12 @@ public class SpaceshipScript : MonoBehaviour {
             if (lives != maxLives) {
                 lives += 1;
 
-                GameObject redHeart = Instantiate(gainHeartAnimationPrefab, transform.position, Quaternion.identity);
-                redHeart.transform.SetParent(gameObject.transform);
+                if (gainHeartAnimationPrefab != null) {
+                    GameObject redHeart = Instantiate(gainHeartAnimationPrefab, transform.position, Quaternion.identity);
+                    redHeart.transform.SetParent(gameObject.transform);
+                } else {
+                    Debug.LogWarning("[SpaceshipScript] gainHeartAnimationPrefab is null - heart pickup animation skipped");
+                }
             }
         } else if (id == "upSideDown") {
             recentlyGain = true;

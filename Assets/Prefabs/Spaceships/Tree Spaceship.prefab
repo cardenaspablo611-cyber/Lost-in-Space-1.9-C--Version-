@@ -112,7 +112,7 @@ MonoBehaviour:
   nameOfBullet: Shot 3
   shieldChildObject: {fileID: 694050952078719140}
   maxLives: 3
-  gainHeartAnimationPrefab: {fileID: 311435827167155410, guid: 8f7e6d5c4b3a2918271605948372615a, type: 3}
+  gainHeartAnimationPrefab: {fileID: 1122334455667788990, guid: 8f7e6d5c4b3a2918271605948372615a, type: 3}
 --- !u!114 &688980928211732228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee8614c734c034499967a38e6739fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spaceshipAnimationPrefab: {fileID: 1798785113380058460, guid: 9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d, type: 3}
+  spaceshipAnimationPrefab: {fileID: 7891234567890123456, guid: 9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d, type: 3}
   greenHeartAnimationPrefab: {fileID: 20654220558455259, guid: 20dceaa0ff3c8d840a8d1ce970be06ea, type: 3}
 --- !u!114 &8456641233441286336
 MonoBehaviour:
