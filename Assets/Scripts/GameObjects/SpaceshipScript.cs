@@ -118,15 +118,10 @@ public class SpaceshipScript : MonoBehaviour {
             return;
         }
 
-        float baseSpeed = speed;
-        speed *= (spaceshipInformation.speed / 30);
+        speed *= spaceshipInformation.speed / 30f;
         damageProbability *= spaceshipInformation.attack * 0.25f - 0.25f;
 
-        Debug.Log($"[SpaceshipScript] {spaceshipInformation.spaceshipTag} initialized: base speed {baseSpeed} * ({spaceshipInformation.speed}/30) = {speed}");
-        
-        if (speed <= 0) {
-            Debug.LogWarning($"[SpaceshipScript] {spaceshipInformation.spaceshipTag} has speed <= 0! Check ScriptableObject asset file.");
-        }
+        Debug.Log($"[SpaceshipScript] {spaceshipInformation.spaceshipTag} initialized: speed = {speed}");
     }
 
     private void Start() {
