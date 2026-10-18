@@ -13,6 +13,7 @@ public class RectangleAdministrator : MonoBehaviour {
     private float speed;
 
     private float YPosition;
+    private bool isAnimating = false;
 
     private void Start () {
 
@@ -25,16 +26,21 @@ public class RectangleAdministrator : MonoBehaviour {
 
     public void Inside() {
 
+        if (isAnimating) return;
+
         StartCoroutine(MoveObjectWithAcceleration(endingYPosition,startingYPosition));
         GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Door");
     }
 
     public void Out() {
 
+        if (isAnimating) return;
+
         StartCoroutine(MoveObjectWithAcceleration(startingYPosition,endingYPosition));
     }
 
     private IEnumerator MoveObjectWithAcceleration(float startY, float endY) {
+        isAnimating = true;
         float elapsedTime = 0f;
 
         Vector3 start = new Vector3(transform.position.x , startY, transform.position.z);
@@ -59,6 +65,7 @@ public class RectangleAdministrator : MonoBehaviour {
 
         // Ensure the object reaches the final position
         transform.position = end;
+        isAnimating = false;
     }
 }
 

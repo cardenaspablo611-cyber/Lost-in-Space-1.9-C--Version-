@@ -387,15 +387,15 @@ public class SpaceshipScript : MonoBehaviour {
 
                 if (lives == 1) {
 
+                    if (deadth) return;
+                    deadth = true;
+
                     rightLeft.sprite = null;
                     upDown.sprite = null;
                     GetComponent<SpriteRenderer>().sprite = null;
 
-                    if (!deadth) {
-                        GameObject explosion = Instantiate(explosionPrefab) as GameObject;
-                        explosion.transform.position = transform.position;
-                        deadth = true;
-                    }    
+                    GameObject explosion = Instantiate(explosionPrefab) as GameObject;
+                    explosion.transform.position = transform.position;
                     
                     GameObject.Find("ControlButtonFunctions").GetComponent<ButtonController>().LoadScene("GameOverMenu");
 
