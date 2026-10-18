@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class HealthRecover : MonoBehaviour {
 
-    [SerializeField] private GameObject spaceshipAnimationPrefab;
-    [SerializeField] private GameObject greenHeartAnimationPrefab;
+    [SerializeField] private GameObject treeGlowAnimationPrefab;  // New: Pablo's green glow animation on the ship
+    [SerializeField] private GameObject greenHeartAnimationPrefab;  // Existing green heart pickup effect
 
-    private GameObject spaceshipAnimation;
+    private GameObject glowAnimation;
 
     private SpaceshipScript parentScript;
 
@@ -23,8 +23,8 @@ public class HealthRecover : MonoBehaviour {
 
     private void FixedUpdate() {
 
-        if (spaceshipAnimation != null) {
-            spaceshipAnimation.transform.position = new Vector3(transform.position.x, transform.position.y + 7.5f, 0f);
+        if (glowAnimation != null) {
+            glowAnimation.transform.position = transform.position;
         }
     }
 
@@ -35,15 +35,18 @@ public class HealthRecover : MonoBehaviour {
             if (parentScript.Lives < 3) {
                 yield return new WaitForSeconds(40);
 
-                spaceshipAnimation = Instantiate(spaceshipAnimationPrefab, transform.position, Quaternion.identity) as GameObject;
-                spaceshipAnimation.transform.SetParent(gameObject.transform);
+                // Play green glow animation on the ship
+                glowAnimation = Instantiate(treeGlowAnimationPrefab, transform.position, Quaternion.identity) as GameObject;
+                glowAnimation.transform.SetParent(gameObject.transform);
 
-                float time = spaceshipAnimation.GetComponent<AnimationScript>().TotalDurationTime;
+                float time = glowAnimation.GetComponent<AnimationScript>().TotalDurationTime;
 
                 yield return new WaitForSeconds(time);
 
+                // Grant the life
                 parentScript.getAHeart();
 
+                // Show green heart effect (reuses existing animation)
                 GameObject greenHeart = Instantiate(greenHeartAnimationPrefab, transform.position, Quaternion.identity) as GameObject;
                 greenHeart.transform.SetParent(gameObject.transform);
                 
