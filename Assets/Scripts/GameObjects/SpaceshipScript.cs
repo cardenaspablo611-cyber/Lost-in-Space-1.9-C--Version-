@@ -271,6 +271,7 @@ public class SpaceshipScript : MonoBehaviour {
             recentlyGain = true;
 
             upSideDown = true;
+            panell.SetScoreMultiplier(2);
 
             StartCoroutine(UpSideDownTime());
         } else if (id == "bulletRush") {
@@ -443,6 +444,7 @@ public class SpaceshipScript : MonoBehaviour {
         yield return new WaitForSeconds(extrasCooldownTime);
 
         upSideDown = false;
+        panell.SetScoreMultiplier(1);
     }
 
     private IEnumerator BulletCooldownFuntion() {

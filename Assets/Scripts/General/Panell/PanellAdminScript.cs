@@ -52,6 +52,7 @@ public class PanellAdminScript : MonoBehaviour {
     // -- Score -- //
     private float scoreCooldownTime = 1f;
     private OmegaCooldown scoreCooldown;
+    private int scoreMultiplier = 1;
 
     private MoneyAdministratorScript moneyAdmin;
 
@@ -190,8 +191,14 @@ public class PanellAdminScript : MonoBehaviour {
     }
 
     public void addScore(int amount) {
+        int finalAmount = amount;
+        
+        if (amount > 0) {
+            finalAmount = amount * scoreMultiplier;
+        }
+        
         var (currentScore, _, _, _, _) = moneyAdmin.GetTemporalInfo();
-        int newScore = currentScore + amount;
+        int newScore = currentScore + finalAmount;
         
         if (newScore < 0) {
             newScore = 0;
@@ -199,6 +206,10 @@ public class PanellAdminScript : MonoBehaviour {
         
         int scoreDifference = newScore - currentScore;
         moneyAdmin.AddGameStats(scoreDifference, 0, 0);
+    }
+
+    public void SetScoreMultiplier(int multiplier) {
+        scoreMultiplier = multiplier;
     }
 
     private void afterpauseCounterBool() {
