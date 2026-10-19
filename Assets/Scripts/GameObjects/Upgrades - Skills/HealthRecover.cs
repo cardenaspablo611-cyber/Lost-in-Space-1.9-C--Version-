@@ -32,7 +32,7 @@ public class HealthRecover : MonoBehaviour {
         yield return new WaitForSeconds(3);
 
         while (true) {
-            if (parentScript.Lives < 3) {
+            if (parentScript.Lives < 3 && !parentScript.Deadth) {
                 yield return new WaitForSeconds(40);
 
                 if (spaceshipAnimationPrefab != null) {

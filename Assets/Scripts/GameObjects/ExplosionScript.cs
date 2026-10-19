@@ -17,6 +17,7 @@ public class ExplosionScript : MonoBehaviour {
 
     private float cooldownTime;
     private OmegaCooldown cooldown;
+    private bool playSoundDisabled = false;
 
     private void Awake() {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -32,9 +33,13 @@ public class ExplosionScript : MonoBehaviour {
         position = transform.position;
 
         // Only play explosion sound for actual explosions, not hit animations
-        if (!isHitMeteoriteAnimation) {
+        if (!isHitMeteoriteAnimation && !playSoundDisabled) {
             GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Explosion");
         }
+    }
+
+    public void DisableSound() {
+        playSoundDisabled = true;
     }
 
     private void FixedUpdate() {

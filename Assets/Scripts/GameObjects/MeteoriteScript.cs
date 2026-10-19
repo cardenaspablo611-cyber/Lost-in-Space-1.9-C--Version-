@@ -269,6 +269,10 @@ public class MeteoriteScript : MonoBehaviour {
         destroyArtificialDeatdh();
     }
 
+    public GameObject GetDeathAnimationPrefab() {
+        return deathAnimationPrefab;
+    }
+
     private void hitByUlty() {
         GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("HitOnEnemy");
         meteoritesHits += 1;

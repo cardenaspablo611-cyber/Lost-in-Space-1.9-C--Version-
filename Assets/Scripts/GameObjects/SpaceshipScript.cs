@@ -64,6 +64,7 @@ public class SpaceshipScript : MonoBehaviour {
     private int bulletStartingPointX = 11;
     private int bulletStartingPointY = 25;
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject greenExplosionPrefab;
     [SerializeField] private string nameOfBullet;
 
     // Extras // 
@@ -225,7 +226,7 @@ public class SpaceshipScript : MonoBehaviour {
         }
 
         if (bulletCooldownDeterminator) {
-            if (Input.GetKey(KeyCode.Space)) {            
+            if (Input.GetKey(KeyCode.Space) && !deadth) {            
                 if (bulletCooldown.coolDownOver() && !userInterface.GetComponent<PauseController>().ItsPaused) {
                     createBulletCouple();
                     StartCoroutine(BulletCooldownFuntion());
@@ -396,8 +397,15 @@ public class SpaceshipScript : MonoBehaviour {
                     upDown.sprite = null;
                     GetComponent<SpriteRenderer>().sprite = null;
 
-                    GameObject explosion = Instantiate(explosionPrefab) as GameObject;
+                    // Use green explosion for player death, play slower
+                    GameObject explosion = Instantiate(greenExplosionPrefab != null ? greenExplosionPrefab : explosionPrefab) as GameObject;
                     explosion.transform.position = transform.position;
+                    
+                    Animator explosionAnimator = explosion.GetComponent<Animator>();
+                    if (explosionAnimator != null) {
+                        explosionAnimator.speed = 0.65f; // 35% slower
+                        explosionAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+                    }
                     
                     StartCoroutine(SlowMotionDeath());
 
@@ -468,28 +476,59 @@ public class SpaceshipScript : MonoBehaviour {
     }
 
     private IEnumerator SlowMotionDeath() {
-        float slowdownDuration = 1.5f;
-        float targetTimeScale = 0.15f;
-        float holdDuration = 0.3f;
+        float slowdownDuration = 2f;
+        float targetTimeScale = 0f;
+        float freezeHoldDuration = 0.4f;
+        float explosionDuration = 0.7f;
 
         float originalFixedDeltaTime = Time.fixedDeltaTime;
         float startTimeScale = Time.timeScale;
         float elapsedTime = 0f;
 
-        // Slow down
+        // Slow down to complete freeze with ease-out curve
         while (elapsedTime < slowdownDuration) {
             elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / slowdownDuration;
-            Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, t);
-            Time.fixedDeltaTime = originalFixedDeltaTime * Time.timeScale;
+            float easedT = 1f - Mathf.Pow(1f - t, 2f); // ease-out quadratic
+            Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, easedT);
+            Time.fixedDeltaTime = originalFixedDeltaTime * Mathf.Max(Time.timeScale, 0.01f);
             yield return null;
         }
 
         Time.timeScale = targetTimeScale;
-        Time.fixedDeltaTime = originalFixedDeltaTime * targetTimeScale;
+        Time.fixedDeltaTime = originalFixedDeltaTime * 0.01f;
 
-        // Hold
-        yield return new WaitForSecondsRealtime(holdDuration);
+        // Hold frozen frame
+        yield return new WaitForSecondsRealtime(freezeHoldDuration);
+
+        // Explode all enemies on screen
+        MeteoriteScript[] allEnemies = FindObjectsOfType<MeteoriteScript>();
+        if (allEnemies.Length > 0) {
+            // Play explosion sound once for all enemies
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Explosion");
+            
+            foreach (MeteoriteScript enemy in allEnemies) {
+                if (enemy != null && enemy.gameObject != null) {
+                    GameObject enemyExplosion = Instantiate(enemy.GetDeathAnimationPrefab() ?? explosionPrefab) as GameObject;
+                    enemyExplosion.transform.position = enemy.transform.position;
+                    
+                    Animator enemyExplosionAnimator = enemyExplosion.GetComponent<Animator>();
+                    if (enemyExplosionAnimator != null) {
+                        enemyExplosionAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+                    }
+                    
+                    ExplosionScript expScript = enemyExplosion.GetComponent<ExplosionScript>();
+                    if (expScript != null) {
+                        expScript.DisableSound();
+                    }
+                    
+                    Destroy(enemy.gameObject);
+                }
+            }
+            
+            // Wait for enemy explosions to finish
+            yield return new WaitForSecondsRealtime(explosionDuration);
+        }
 
         // Restore normal speed
         Time.timeScale = 1f;

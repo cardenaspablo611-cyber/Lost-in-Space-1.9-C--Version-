@@ -24,7 +24,10 @@ public class ElectricBlastScript : MonoBehaviour {
 
         while (true) {
 
-            electricBlast = Instantiate(electricBlastPrefab, transform.position, Quaternion.identity) as GameObject;
+            SpaceshipScript spaceship = GetComponent<SpaceshipScript>();
+            if (spaceship != null && !spaceship.Deadth) {
+                electricBlast = Instantiate(electricBlastPrefab, transform.position, Quaternion.identity) as GameObject;
+            }
             
             yield return new WaitForSeconds(20);
         }

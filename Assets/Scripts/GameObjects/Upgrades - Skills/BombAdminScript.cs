@@ -17,7 +17,10 @@ public class BombAdminScript : MonoBehaviour {
 
         while (true) {
 
-            Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            SpaceshipScript spaceship = GetComponent<SpaceshipScript>();
+            if (spaceship != null && !spaceship.Deadth) {
+                Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            }
             
             yield return new WaitForSeconds(35);
         }
