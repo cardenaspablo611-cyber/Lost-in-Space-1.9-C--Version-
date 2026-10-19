@@ -512,7 +512,6 @@ public class SpaceshipScript : MonoBehaviour {
         float slowdownDuration = 4f;
         float targetTimeScale = 0f;
         float freezeHoldDuration = 0.4f;
-        float explosionDuration = 0.7f;
 
         float originalFixedDeltaTime = Time.fixedDeltaTime;
         float startTimeScale = Time.timeScale;
@@ -587,36 +586,6 @@ public class SpaceshipScript : MonoBehaviour {
 
         // Hold frozen frame
         yield return new WaitForSecondsRealtime(freezeHoldDuration);
-
-        // Explode all enemies on screen
-        MeteoriteScript[] allEnemies = FindObjectsOfType<MeteoriteScript>();
-        if (allEnemies.Length > 0) {
-            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Explosion");
-            
-            foreach (MeteoriteScript enemy in allEnemies) {
-                if (enemy != null && enemy.gameObject != null) {
-                    GameObject enemyDeathPrefab = enemy.GetDeathAnimationPrefab();
-                    if (enemyDeathPrefab == null) {
-                        enemyDeathPrefab = explosionPrefab;
-                    }
-                    
-                    GameObject enemyExplosion = Instantiate(enemyDeathPrefab) as GameObject;
-                    enemyExplosion.transform.position = enemy.transform.position;
-                    
-                    ExplosionScript enemyExpScript = enemyExplosion.GetComponent<ExplosionScript>();
-                    if (enemyExpScript != null) {
-                        // Use proper cooldown for enemy explosions
-                        enemyExpScript.getComponents(0, 0.1f); // Normal explosion speed
-                        enemyExpScript.UseUnscaledTime(); // So it animates at timeScale=0
-                        enemyExpScript.DisableSound();
-                    }
-                    
-                    Destroy(enemy.gameObject);
-                }
-            }
-            
-            yield return new WaitForSecondsRealtime(explosionDuration);
-        }
 
         // Restore everything
         spaceParent.transform.localScale = originalSpaceScale;

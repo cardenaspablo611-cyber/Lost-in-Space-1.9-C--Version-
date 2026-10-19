@@ -17,7 +17,6 @@ public class ExplosionScript : MonoBehaviour {
 
     private float cooldownTime;
     private OmegaCooldown cooldown;
-    private bool playSoundDisabled = false;
     private bool useUnscaledTime = false;
     private float unscaledCooldownTimer = 0f;
 
@@ -35,13 +34,9 @@ public class ExplosionScript : MonoBehaviour {
         position = transform.position;
 
         // Only play explosion sound for actual explosions, not hit animations
-        if (!isHitMeteoriteAnimation && !playSoundDisabled) {
+        if (!isHitMeteoriteAnimation) {
             GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Explosion");
         }
-    }
-
-    public void DisableSound() {
-        playSoundDisabled = true;
     }
 
     public void UseUnscaledTime() {
