@@ -15,18 +15,22 @@ public class StarsScript : MonoBehaviour {
     private SpaceParent space;
     private SpriteRenderer spriteRenderer;
 
-    [Header("Planet Star Colors")]
-    [SerializeField] private Color[] planetStarColors = new Color[] {
-        new Color(1f, 1f, 1f, 1f),           // Planet 1: Destroyed - White
-        new Color(1f, 0.85f, 0.45f, 1f),     // Planet 2: Desert - Orange
-        new Color(0.75f, 0.55f, 1f, 1f),     // Planet 3: Techno - Purple
-        new Color(0.55f, 0.85f, 1f, 1f),     // Planet 4: Electric - Blue
-        new Color(1f, 0.45f, 0.45f, 1f)      // Planet 5: Octopus - Red
+    // Star tint per planet (Destroyed, Desert, Techno, Electric, Octopus).
+    // Each planet has a palette; every star picks one color from it at random,
+    // so Techno stars come out red, blue or purple like its enemies.
+    private static readonly Color[][] planetStarPalettes = new Color[][] {
+        new Color[] { new Color(1f, 1f, 1f, 1f) },                                  // 1 Destroyed - white
+        new Color[] { new Color(1f, 0.78f, 0.3f, 1f) },                             // 2 Desert - yellow/orange
+        new Color[] { new Color(1f, 0.38f, 0.38f, 1f),                              // 3 Techno - red
+                      new Color(0.45f, 0.62f, 1f, 1f),                              //            blue
+                      new Color(0.75f, 0.42f, 1f, 1f) },                            //            purple
+        new Color[] { new Color(0.45f, 0.8f, 1f, 1f) },                             // 4 Electric - light blue
+        new Color[] { new Color(1f, 0.32f, 0.32f, 1f) }                             // 5 Octopus - red
     };
 
-    private static Color[] staticPlanetStarColors;
     private static int currentPlanetIndex = 0;
-    private static Color targetColor = Color.white;
+    private Color startColor = Color.white;
+    private Color targetColor = Color.white;
     private Color currentColor = Color.white;
     private float colorLerpTime = 0f;
     private const float colorTransitionDuration = 2f;
@@ -34,21 +38,24 @@ public class StarsScript : MonoBehaviour {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void ResetStatics() {
         currentPlanetIndex = 0;
-        targetColor = Color.white;
-        staticPlanetStarColors = null;
+        // Every new run (scene load) starts again with white stars
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private static void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode) {
+        currentPlanetIndex = 0;
     }
 
     private void Awake() {
         space = F.GetScriptComponentName<SpaceParent>("Space - Parent");
         spriteRenderer = GetComponent<SpriteRenderer>();
         
-        if (staticPlanetStarColors == null) {
-            staticPlanetStarColors = planetStarColors;
-        }
-        
         if (spriteRenderer != null) {
-            currentColor = GetPlanetColor(currentPlanetIndex);
+            currentColor = PickPlanetColor(currentPlanetIndex);
+            startColor = currentColor;
             targetColor = currentColor;
+            colorLerpTime = colorTransitionDuration;
             spriteRenderer.color = currentColor;
         }
     }
@@ -118,34 +125,32 @@ public class StarsScript : MonoBehaviour {
     private void UpdateStarColor() {
         if (spriteRenderer == null) return;
 
-        if (currentColor != targetColor) {
+        if (colorLerpTime < colorTransitionDuration) {
             colorLerpTime += Time.fixedDeltaTime;
             float t = Mathf.Clamp01(colorLerpTime / colorTransitionDuration);
-            currentColor = Color.Lerp(currentColor, targetColor, t);
+            currentColor = Color.Lerp(startColor, targetColor, t);
             spriteRenderer.color = currentColor;
         }
     }
 
-    private Color GetPlanetColor(int planetIndex) {
-        Color[] colors = staticPlanetStarColors != null ? staticPlanetStarColors : planetStarColors;
-        if (planetIndex >= 0 && planetIndex < colors.Length) {
-            return colors[planetIndex];
-        }
-        return Color.white;
+    private static Color PickPlanetColor(int planetIndex) {
+        if (planetIndex < 0 || planetIndex >= planetStarPalettes.Length) return Color.white;
+        Color[] palette = planetStarPalettes[planetIndex];
+        return palette[Random.Range(0, palette.Length)];
+    }
+
+    private void BeginColorTransition(Color newTarget) {
+        startColor = currentColor;
+        targetColor = newTarget;
+        colorLerpTime = 0f;
     }
 
     public static void SetPlanetIndex(int planetIndex) {
         currentPlanetIndex = planetIndex;
-        
-        if (staticPlanetStarColors != null && planetIndex >= 0 && planetIndex < staticPlanetStarColors.Length) {
-            targetColor = staticPlanetStarColors[planetIndex];
-        } else {
-            targetColor = Color.white;
-        }
-        
+
         StarsScript[] allStars = FindObjectsOfType<StarsScript>();
         foreach (var star in allStars) {
-            star.colorLerpTime = 0f;
+            star.BeginColorTransition(PickPlanetColor(planetIndex));
         }
     }
 }
