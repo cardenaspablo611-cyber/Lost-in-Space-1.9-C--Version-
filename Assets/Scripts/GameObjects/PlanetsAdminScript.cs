@@ -46,6 +46,8 @@ public class PlanetsAdminScript : MonoBehaviour {
 
     private void FixedUpdate() {
 
+        if (SpaceshipScript.IsGameOver) return;
+
         generatePlanet();
         checkForDestroyedMeteorites();
     }

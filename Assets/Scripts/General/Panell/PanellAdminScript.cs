@@ -127,7 +127,8 @@ public class PanellAdminScript : MonoBehaviour {
             return;
         }
 
-        if (scoreCooldown.coolDownOver()) {
+        // Don't add score if game is over
+        if (!SpaceshipScript.IsGameOver && scoreCooldown.coolDownOver()) {
             var (currentScore, _, _, _, _) = moneyAdmin.GetTemporalInfo();
             moneyAdmin.AddGameStats(1 * scoreMultiplier, 0, 0); // Add 1 to score (x2 while upSideDown is active)
         }
@@ -224,6 +225,11 @@ public class PanellAdminScript : MonoBehaviour {
     }
 
     private void updateTimeTransition() {
+        // Don't interfere with death sequence timeScale changes
+        if (SpaceshipScript.IsGameOver) {
+            return;
+        }
+        
         if (isTransitioningTime) {
             currentTimeScale = Mathf.Lerp(currentTimeScale, originalTimeScale, Time.unscaledDeltaTime * timeScaleTransitionSpeed);
             Time.timeScale = currentTimeScale;
@@ -234,6 +240,10 @@ public class PanellAdminScript : MonoBehaviour {
                 isTransitioningTime = false;
             }
         }
+    }
+
+    public void StopTimeScaleTransitions() {
+        isTransitioningTime = false;
     }
 
     public void afterPausing(float givenTime) {

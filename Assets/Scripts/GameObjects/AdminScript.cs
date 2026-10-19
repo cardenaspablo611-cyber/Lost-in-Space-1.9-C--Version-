@@ -66,6 +66,8 @@ public class AdminScript : MonoBehaviour {
 
     private void FixedUpdate() {
 
+        if (SpaceshipScript.IsGameOver) return;
+
         if (extrasCooldown.coolDownOver()) { 
 
             GameObject extra;

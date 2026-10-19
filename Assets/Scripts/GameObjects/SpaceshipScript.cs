@@ -5,6 +5,14 @@ using System.Collections.Generic;
 
 public class SpaceshipScript : MonoBehaviour {
 
+    // Global death flag to prevent all game systems from running
+    public static bool IsGameOver { get; private set; } = false;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void ResetGameOverFlag() {
+        IsGameOver = false;
+    }
+
     [SerializeField] private SpecificSpaceshipInformation spaceshipInformation;
 
     private Vector2 position;
@@ -376,7 +384,7 @@ public class SpaceshipScript : MonoBehaviour {
     }
 
     public void gotHitten() {
-        if (!inmunity) {
+        if (!inmunity && !IsGameOver) {
             
             audioManager.PlayEffect("Spaceship Getting Hit");
 
@@ -392,28 +400,35 @@ public class SpaceshipScript : MonoBehaviour {
                 if (lives == 1) {
 
                     if (deadth) return;
+                    
+                    // Set flags immediately to stop all game systems
                     deadth = true;
+                    IsGameOver = true;
                     lives = 0;
+                    
+                    // Disable collider to prevent further hits
+                    Collider2D shipCollider = GetComponent<Collider2D>();
+                    if (shipCollider != null) {
+                        shipCollider.enabled = false;
+                    }
 
+                    // Hide ship sprites
                     rightLeft.sprite = null;
                     upDown.sprite = null;
                     GetComponent<SpriteRenderer>().sprite = null;
 
-                    // Instantiate green explosion (the explosionPrefab has green tint)
-                    GameObject explosion = Instantiate(explosionPrefab) as GameObject;
-                    explosion.transform.position = transform.position;
-                    
-                    ExplosionScript expScript = explosion.GetComponent<ExplosionScript>();
-                    if (expScript != null) {
-                        // Make it play ~35% slower: use 1.5x the deathAnimationCooldownTime
-                        // AdminScript uses deathAnimationCooldownTime for special deaths
-                        // Assuming deathAnimationCooldownTime is ~0.1, use 0.15 for slower playback
-                        expScript.getComponents(0, 0.15f);
-                        expScript.setDeathAnimation();
-                        expScript.UseUnscaledTime(); // So it animates during slowdown
+                    // Run death sequence on a persistent GameObject (ControlButtonFunctions)
+                    GameObject controlButtonFunctions = GameObject.Find("ControlButtonFunctions");
+                    if (controlButtonFunctions != null) {
+                        MonoBehaviour persistentScript = controlButtonFunctions.GetComponent<ButtonController>();
+                        if (persistentScript != null) {
+                            persistentScript.StartCoroutine(SlowMotionDeathSequence(transform.position, explosionPrefab));
+                        } else {
+                            Debug.LogError("[SpaceshipScript] ButtonController not found!");
+                        }
+                    } else {
+                        Debug.LogError("[SpaceshipScript] ControlButtonFunctions GameObject not found!");
                     }
-                    
-                    StartCoroutine(SlowMotionDeath());
 
                 } else if (!inmunity) {
                     lives -= 1;
@@ -508,7 +523,21 @@ public class SpaceshipScript : MonoBehaviour {
         mainCamera.transform.position = originalPosition;
     }
 
-    private IEnumerator SlowMotionDeath() {
+    public static IEnumerator SlowMotionDeathSequence(Vector3 shipPosition, GameObject explosionPrefab) {
+        // This coroutine runs on a persistent GameObject (ControlButtonFunctions)
+        // so it won't stop if the ship is disabled
+        
+        // Instantiate green explosion at ship position
+        GameObject explosion = Object.Instantiate(explosionPrefab) as GameObject;
+        explosion.transform.position = shipPosition;
+        
+        ExplosionScript expScript = explosion.GetComponent<ExplosionScript>();
+        if (expScript != null) {
+            expScript.getComponents(0, 0.15f); // 35% slower
+            expScript.setDeathAnimation();
+            expScript.UseUnscaledTime(); // Animates during slowdown
+        }
+        
         float slowdownDuration = 4f;
         float targetTimeScale = 0f;
         float freezeHoldDuration = 0.4f;
@@ -535,13 +564,18 @@ public class SpaceshipScript : MonoBehaviour {
         Vector3 originalSpaceScale = spaceParent.transform.localScale;
         Vector3 originalSpacePosition = spaceParent.transform.position;
         float targetZoomScale = 1.67f; // 1/0.6 = 1.67 to achieve 60% view (zooming in)
-        Vector3 shipPosition = transform.position;
         
         // Camera shake parameters
         float shakeIntensity = 2.5f;
         float shakeDecayPower = 2f;
         
         float elapsedTime = 0f;
+
+        // Tell PanellAdminScript to stop its timeScale transitions
+        PanellAdminScript panellAdmin = GameObject.Find("Panell Object")?.GetComponent<PanellAdminScript>();
+        if (panellAdmin != null) {
+            panellAdmin.StopTimeScaleTransitions();
+        }
 
         // Slow down to complete freeze with camera shake and gameplay zoom
         while (elapsedTime < slowdownDuration) {

@@ -122,7 +122,7 @@ public class MeteoriteScript : MonoBehaviour {
             }
         }
 
-        if (collision.gameObject.CompareTag("Spaceship") && !spaceship.Immunity) {
+        if (collision.gameObject.CompareTag("Spaceship") && !spaceship.Immunity && !SpaceshipScript.IsGameOver) {
             spaceship.gotHitten();
             destroyArtificial = true;
         }
