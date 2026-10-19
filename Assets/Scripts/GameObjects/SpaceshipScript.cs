@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using F = Functions;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,14 @@ public class SpaceshipScript : MonoBehaviour {
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void ResetGameOverFlag() {
+        // Reset flag at app start
+        IsGameOver = false;
+        // Also register scene load callback to reset on every scene change
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        // Reset IsGameOver whenever any scene loads (ensures retry/new game works)
         IsGameOver = false;
     }
 
@@ -110,6 +119,10 @@ public class SpaceshipScript : MonoBehaviour {
     private AudioManager audioManager;
 
     private void Awake() {
+        // Safety: Ensure IsGameOver is false when spaceship instance is created
+        // (Should already be reset by OnSceneLoaded, but this is extra protection)
+        IsGameOver = false;
+        
         upDown = childUpDown.GetComponent<SpriteRenderer>();
         rightLeft = childRightLeft.GetComponent<SpriteRenderer>();
 
