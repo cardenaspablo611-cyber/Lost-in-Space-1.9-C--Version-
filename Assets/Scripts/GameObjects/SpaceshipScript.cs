@@ -385,6 +385,9 @@ public class SpaceshipScript : MonoBehaviour {
                 panell.addScore(amountPerDeadth);
 
                 admin.instantiateTakeDamageObject();
+                
+                // Screen shake on damage
+                StartCoroutine(DamageScreenShake());
 
                 if (lives == 1) {
 
@@ -478,6 +481,33 @@ public class SpaceshipScript : MonoBehaviour {
         bulletRush = false;
     }
 
+    private IEnumerator DamageScreenShake() {
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null) yield break;
+        
+        Vector3 originalPosition = mainCamera.transform.position;
+        float duration = 0.2f; // Short shake
+        float intensity = 0.8f; // Smaller than death shake
+        float elapsed = 0f;
+        
+        while (elapsed < duration) {
+            elapsed += Time.unscaledDeltaTime;
+            float t = elapsed / duration;
+            float shakeAmount = intensity * (1f - t); // Decay quickly
+            
+            Vector3 shake = new Vector3(
+                Random.Range(-shakeAmount, shakeAmount),
+                Random.Range(-shakeAmount, shakeAmount),
+                0f
+            );
+            
+            mainCamera.transform.position = originalPosition + shake;
+            yield return null;
+        }
+        
+        mainCamera.transform.position = originalPosition;
+    }
+
     private IEnumerator SlowMotionDeath() {
         float slowdownDuration = 4f;
         float targetTimeScale = 0f;
@@ -487,7 +517,7 @@ public class SpaceshipScript : MonoBehaviour {
         float originalFixedDeltaTime = Time.fixedDeltaTime;
         float startTimeScale = Time.timeScale;
         
-        // Get the main camera
+        // Get the main camera for shake
         Camera mainCamera = Camera.main;
         if (mainCamera == null) {
             Debug.LogError("[SpaceshipScript] Camera.main is null!");
@@ -495,8 +525,17 @@ public class SpaceshipScript : MonoBehaviour {
         }
         
         Vector3 originalCameraPosition = mainCamera.transform.position;
-        float originalOrthographicSize = mainCamera.orthographicSize;
-        float targetOrthographicSize = originalOrthographicSize * 0.6f;
+        
+        // Get the Space - Parent GameObject for gameplay-only zoom
+        GameObject spaceParent = GameObject.Find("Space - Parent");
+        if (spaceParent == null) {
+            Debug.LogError("[SpaceshipScript] 'Space - Parent' GameObject not found!");
+            yield break;
+        }
+        
+        Vector3 originalSpaceScale = spaceParent.transform.localScale;
+        Vector3 originalSpacePosition = spaceParent.transform.position;
+        float targetZoomScale = 1.67f; // 1/0.6 = 1.67 to achieve 60% view (zooming in)
         Vector3 shipPosition = transform.position;
         
         // Camera shake parameters
@@ -505,7 +544,7 @@ public class SpaceshipScript : MonoBehaviour {
         
         float elapsedTime = 0f;
 
-        // Slow down to complete freeze with camera shake and zoom
+        // Slow down to complete freeze with camera shake and gameplay zoom
         while (elapsedTime < slowdownDuration) {
             elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / slowdownDuration;
@@ -517,12 +556,15 @@ public class SpaceshipScript : MonoBehaviour {
             Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, easedT);
             Time.fixedDeltaTime = originalFixedDeltaTime * Mathf.Max(Time.timeScale, 0.01f);
             
-            // Camera zoom toward ship
-            float currentSize = Mathf.Lerp(originalOrthographicSize, targetOrthographicSize, easedT);
-            mainCamera.orthographicSize = currentSize;
+            // Zoom the gameplay area (Space - Parent) by scaling it up
+            float currentScale = Mathf.Lerp(1f, targetZoomScale, easedT);
+            spaceParent.transform.localScale = originalSpaceScale * currentScale;
             
-            Vector3 targetPosition = new Vector3(shipPosition.x, shipPosition.y, originalCameraPosition.z);
-            Vector3 zoomedPosition = Vector3.Lerp(originalCameraPosition, targetPosition, easedT);
+            // Adjust Space - Parent position to keep ship centered as it scales
+            // When scaling, objects move away from origin, so we need to counteract that
+            Vector3 offset = shipPosition - originalSpacePosition;
+            Vector3 scaledOffset = offset * (currentScale - 1f);
+            spaceParent.transform.position = originalSpacePosition - scaledOffset;
             
             // Camera shake (strongest at start, decaying over time)
             float shakeAmount = shakeIntensity * Mathf.Pow(1f - t, shakeDecayPower);
@@ -532,7 +574,7 @@ public class SpaceshipScript : MonoBehaviour {
                 0f
             );
             
-            mainCamera.transform.position = zoomedPosition + shake;
+            mainCamera.transform.position = originalCameraPosition + shake;
             
             yield return null;
         }
@@ -540,8 +582,8 @@ public class SpaceshipScript : MonoBehaviour {
         Time.timeScale = targetTimeScale;
         Time.fixedDeltaTime = originalFixedDeltaTime * 0.01f;
         
-        // Stop shake, keep zoom
-        mainCamera.transform.position = new Vector3(shipPosition.x, shipPosition.y, originalCameraPosition.z);
+        // Stop shake, keep gameplay zoom
+        mainCamera.transform.position = originalCameraPosition;
 
         // Hold frozen frame
         yield return new WaitForSecondsRealtime(freezeHoldDuration);
@@ -576,9 +618,10 @@ public class SpaceshipScript : MonoBehaviour {
             yield return new WaitForSecondsRealtime(explosionDuration);
         }
 
-        // Restore camera and time scale (camera will be reset by scene load anyway)
+        // Restore everything
+        spaceParent.transform.localScale = originalSpaceScale;
+        spaceParent.transform.position = originalSpacePosition;
         mainCamera.transform.position = originalCameraPosition;
-        mainCamera.orthographicSize = originalOrthographicSize;
         Time.timeScale = 1f;
         Time.fixedDeltaTime = originalFixedDeltaTime;
 
