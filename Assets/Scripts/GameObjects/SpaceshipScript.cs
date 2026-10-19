@@ -399,7 +399,7 @@ public class SpaceshipScript : MonoBehaviour {
                     GameObject explosion = Instantiate(explosionPrefab) as GameObject;
                     explosion.transform.position = transform.position;
                     
-                    GameObject.Find("ControlButtonFunctions").GetComponent<ButtonController>().LoadScene("GameOverMenu");
+                    StartCoroutine(SlowMotionDeath());
 
                 } else if (!inmunity) {
                     lives -= 1;
@@ -465,5 +465,37 @@ public class SpaceshipScript : MonoBehaviour {
         
         bulletCooldownTime = originalCooldownTime;
         bulletRush = false;
+    }
+
+    private IEnumerator SlowMotionDeath() {
+        float slowdownDuration = 1.5f;
+        float targetTimeScale = 0.15f;
+        float holdDuration = 0.3f;
+
+        float originalFixedDeltaTime = Time.fixedDeltaTime;
+        float startTimeScale = Time.timeScale;
+        float elapsedTime = 0f;
+
+        // Slow down
+        while (elapsedTime < slowdownDuration) {
+            elapsedTime += Time.unscaledDeltaTime;
+            float t = elapsedTime / slowdownDuration;
+            Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, t);
+            Time.fixedDeltaTime = originalFixedDeltaTime * Time.timeScale;
+            yield return null;
+        }
+
+        Time.timeScale = targetTimeScale;
+        Time.fixedDeltaTime = originalFixedDeltaTime * targetTimeScale;
+
+        // Hold
+        yield return new WaitForSecondsRealtime(holdDuration);
+
+        // Restore normal speed
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = originalFixedDeltaTime;
+
+        // Load game over menu (doors will close at normal speed)
+        GameObject.Find("ControlButtonFunctions").GetComponent<ButtonController>().LoadScene("GameOverMenu");
     }    
 }

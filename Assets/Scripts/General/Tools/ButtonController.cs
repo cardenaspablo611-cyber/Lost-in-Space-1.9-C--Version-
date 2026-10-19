@@ -15,6 +15,16 @@ public class ButtonController : MonoBehaviour {
 
     [SerializeField] private SceneData sceneData;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void RegisterSceneLoadHandler() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        Time.timeScale = 1f;
+    }
+
     private void Start()
     {
         moneyAdmin = FindFirstObjectByType<MoneyAdministratorScript>();
