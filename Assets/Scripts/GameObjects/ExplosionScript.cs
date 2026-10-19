@@ -18,6 +18,8 @@ public class ExplosionScript : MonoBehaviour {
     private float cooldownTime;
     private OmegaCooldown cooldown;
     private bool playSoundDisabled = false;
+    private bool useUnscaledTime = false;
+    private float unscaledCooldownTimer = 0f;
 
     private void Awake() {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -42,9 +44,22 @@ public class ExplosionScript : MonoBehaviour {
         playSoundDisabled = true;
     }
 
+    public void UseUnscaledTime() {
+        useUnscaledTime = true;
+    }
+
+    private void Update() {
+        if (useUnscaledTime) {
+            explosionMovement();
+            spriteAnimationUnscaled();
+        }
+    }
+
     private void FixedUpdate() {
-        explosionMovement();
-        spriteAnimation();
+        if (!useUnscaledTime) {
+            explosionMovement();
+            spriteAnimation();
+        }
     }
 
     private void explosionMovement() {
@@ -55,6 +70,19 @@ public class ExplosionScript : MonoBehaviour {
 
     private void spriteAnimation() {
         if (cooldown.coolDownOver()) {
+            explosionState += 1;
+            if (explosionState > sprites.Length - 1) {
+                Destroy(gameObject);
+            } else {
+                spriteRenderer.sprite = sprites[explosionState];
+            }
+        }
+    }
+
+    private void spriteAnimationUnscaled() {
+        unscaledCooldownTimer += Time.unscaledDeltaTime;
+        if (unscaledCooldownTimer >= cooldownTime) {
+            unscaledCooldownTimer = 0f;
             explosionState += 1;
             if (explosionState > sprites.Length - 1) {
                 Destroy(gameObject);

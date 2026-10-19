@@ -64,7 +64,6 @@ public class SpaceshipScript : MonoBehaviour {
     private int bulletStartingPointX = 11;
     private int bulletStartingPointY = 25;
     [SerializeField] private GameObject explosionPrefab;
-    [SerializeField] private GameObject greenExplosionPrefab;
     [SerializeField] private string nameOfBullet;
 
     // Extras // 
@@ -391,20 +390,24 @@ public class SpaceshipScript : MonoBehaviour {
 
                     if (deadth) return;
                     deadth = true;
-                    lives = 0; // so the last heart disappears from the panel
+                    lives = 0;
 
                     rightLeft.sprite = null;
                     upDown.sprite = null;
                     GetComponent<SpriteRenderer>().sprite = null;
 
-                    // Use green explosion for player death, play slower
-                    GameObject explosion = Instantiate(greenExplosionPrefab != null ? greenExplosionPrefab : explosionPrefab) as GameObject;
+                    // Instantiate green explosion (the explosionPrefab has green tint)
+                    GameObject explosion = Instantiate(explosionPrefab) as GameObject;
                     explosion.transform.position = transform.position;
                     
-                    Animator explosionAnimator = explosion.GetComponent<Animator>();
-                    if (explosionAnimator != null) {
-                        explosionAnimator.speed = 0.65f; // 35% slower
-                        explosionAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+                    ExplosionScript expScript = explosion.GetComponent<ExplosionScript>();
+                    if (expScript != null) {
+                        // Make it play ~35% slower: use 1.5x the deathAnimationCooldownTime
+                        // AdminScript uses deathAnimationCooldownTime for special deaths
+                        // Assuming deathAnimationCooldownTime is ~0.1, use 0.15 for slower playback
+                        expScript.getComponents(0, 0.15f);
+                        expScript.setDeathAnimation();
+                        expScript.UseUnscaledTime(); // So it animates during slowdown
                     }
                     
                     StartCoroutine(SlowMotionDeath());
@@ -476,27 +479,69 @@ public class SpaceshipScript : MonoBehaviour {
     }
 
     private IEnumerator SlowMotionDeath() {
-        float slowdownDuration = 2f;
+        float slowdownDuration = 4f;
         float targetTimeScale = 0f;
         float freezeHoldDuration = 0.4f;
         float explosionDuration = 0.7f;
 
         float originalFixedDeltaTime = Time.fixedDeltaTime;
         float startTimeScale = Time.timeScale;
+        
+        // Get the main camera
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null) {
+            Debug.LogError("[SpaceshipScript] Camera.main is null!");
+            yield break;
+        }
+        
+        Vector3 originalCameraPosition = mainCamera.transform.position;
+        float originalOrthographicSize = mainCamera.orthographicSize;
+        float targetOrthographicSize = originalOrthographicSize * 0.6f;
+        Vector3 shipPosition = transform.position;
+        
+        // Camera shake parameters
+        float shakeIntensity = 2.5f;
+        float shakeDecayPower = 2f;
+        
         float elapsedTime = 0f;
 
-        // Slow down to complete freeze with ease-out curve
+        // Slow down to complete freeze with camera shake and zoom
         while (elapsedTime < slowdownDuration) {
             elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / slowdownDuration;
-            float easedT = 1f - Mathf.Pow(1f - t, 2f); // ease-out quadratic
+            
+            // Smoothstep ease (smooth start and end)
+            float easedT = t * t * (3f - 2f * t);
+            
+            // Update time scale
             Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, easedT);
             Time.fixedDeltaTime = originalFixedDeltaTime * Mathf.Max(Time.timeScale, 0.01f);
+            
+            // Camera zoom toward ship
+            float currentSize = Mathf.Lerp(originalOrthographicSize, targetOrthographicSize, easedT);
+            mainCamera.orthographicSize = currentSize;
+            
+            Vector3 targetPosition = new Vector3(shipPosition.x, shipPosition.y, originalCameraPosition.z);
+            Vector3 zoomedPosition = Vector3.Lerp(originalCameraPosition, targetPosition, easedT);
+            
+            // Camera shake (strongest at start, decaying over time)
+            float shakeAmount = shakeIntensity * Mathf.Pow(1f - t, shakeDecayPower);
+            Vector3 shake = new Vector3(
+                Random.Range(-shakeAmount, shakeAmount),
+                Random.Range(-shakeAmount, shakeAmount),
+                0f
+            );
+            
+            mainCamera.transform.position = zoomedPosition + shake;
+            
             yield return null;
         }
 
         Time.timeScale = targetTimeScale;
         Time.fixedDeltaTime = originalFixedDeltaTime * 0.01f;
+        
+        // Stop shake, keep zoom
+        mainCamera.transform.position = new Vector3(shipPosition.x, shipPosition.y, originalCameraPosition.z);
 
         // Hold frozen frame
         yield return new WaitForSecondsRealtime(freezeHoldDuration);
@@ -504,37 +549,39 @@ public class SpaceshipScript : MonoBehaviour {
         // Explode all enemies on screen
         MeteoriteScript[] allEnemies = FindObjectsOfType<MeteoriteScript>();
         if (allEnemies.Length > 0) {
-            // Play explosion sound once for all enemies
             GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Explosion");
             
             foreach (MeteoriteScript enemy in allEnemies) {
                 if (enemy != null && enemy.gameObject != null) {
-                    GameObject enemyExplosion = Instantiate(enemy.GetDeathAnimationPrefab() ?? explosionPrefab) as GameObject;
-                    enemyExplosion.transform.position = enemy.transform.position;
-                    
-                    Animator enemyExplosionAnimator = enemyExplosion.GetComponent<Animator>();
-                    if (enemyExplosionAnimator != null) {
-                        enemyExplosionAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+                    GameObject enemyDeathPrefab = enemy.GetDeathAnimationPrefab();
+                    if (enemyDeathPrefab == null) {
+                        enemyDeathPrefab = explosionPrefab;
                     }
                     
-                    ExplosionScript expScript = enemyExplosion.GetComponent<ExplosionScript>();
-                    if (expScript != null) {
-                        expScript.DisableSound();
+                    GameObject enemyExplosion = Instantiate(enemyDeathPrefab) as GameObject;
+                    enemyExplosion.transform.position = enemy.transform.position;
+                    
+                    ExplosionScript enemyExpScript = enemyExplosion.GetComponent<ExplosionScript>();
+                    if (enemyExpScript != null) {
+                        // Use proper cooldown for enemy explosions
+                        enemyExpScript.getComponents(0, 0.1f); // Normal explosion speed
+                        enemyExpScript.UseUnscaledTime(); // So it animates at timeScale=0
+                        enemyExpScript.DisableSound();
                     }
                     
                     Destroy(enemy.gameObject);
                 }
             }
             
-            // Wait for enemy explosions to finish
             yield return new WaitForSecondsRealtime(explosionDuration);
         }
 
-        // Restore normal speed
+        // Restore camera and time scale (camera will be reset by scene load anyway)
+        mainCamera.transform.position = originalCameraPosition;
+        mainCamera.orthographicSize = originalOrthographicSize;
         Time.timeScale = 1f;
         Time.fixedDeltaTime = originalFixedDeltaTime;
 
-        // Load game over menu (doors will close at normal speed)
         GameObject.Find("ControlButtonFunctions").GetComponent<ButtonController>().LoadScene("GameOverMenu");
     }    
 }
