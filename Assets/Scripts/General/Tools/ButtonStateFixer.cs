@@ -8,7 +8,6 @@ public class ButtonStateFixer : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private Sprite highlightedSprite;
     
     private Image buttonImage;
-    private bool isHovering = false;
     
     private void Start() {
         buttonImage = GetComponent<Image>();
@@ -21,18 +20,15 @@ public class ButtonStateFixer : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
 
     private void OnDisable() {
-        isHovering = false;
     }
     
     public void OnPointerEnter(PointerEventData eventData) {
-        isHovering = true;
         if (buttonImage != null && highlightedSprite != null) {
             buttonImage.sprite = highlightedSprite;
         }
     }
     
     public void OnPointerExit(PointerEventData eventData) {
-        isHovering = false;
         ResetToNormal();
     }
 

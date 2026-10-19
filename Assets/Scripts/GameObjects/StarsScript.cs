@@ -21,11 +21,17 @@ public class StarsScript : MonoBehaviour {
     private static readonly Color[][] planetStarPalettes = new Color[][] {
         new Color[] { new Color(1f, 1f, 1f, 1f) },                                  // 1 Destroyed - white
         new Color[] { new Color(1f, 0.78f, 0.3f, 1f) },                             // 2 Desert - yellow/orange
-        new Color[] { new Color(1f, 0.38f, 0.38f, 1f),                              // 3 Techno - red
-                      new Color(0.45f, 0.62f, 1f, 1f),                              //            blue
-                      new Color(0.75f, 0.42f, 1f, 1f) },                            //            purple
+        new Color[] { new Color(0.45f, 0.62f, 1f, 1f),                              // 3 Techno - mostly blue,
+                      new Color(0.45f, 0.62f, 1f, 1f),                              //            then purple,
+                      new Color(0.45f, 0.62f, 1f, 1f),                              //            a little red
+                      new Color(0.75f, 0.42f, 1f, 1f),                              //            (repeats = weight)
+                      new Color(0.75f, 0.42f, 1f, 1f),
+                      new Color(1f, 0.38f, 0.38f, 1f) },
         new Color[] { new Color(0.45f, 0.8f, 1f, 1f) },                             // 4 Electric - light blue
-        new Color[] { new Color(1f, 0.32f, 0.32f, 1f) }                             // 5 Octopus - red
+        new Color[] { new Color(1f, 0.35f, 0.35f, 1f),                              // 5 Octopus - red mixed with grey,
+                      new Color(0.85f, 0.55f, 0.55f, 1f),                           //            like the planet
+                      new Color(0.65f, 0.65f, 0.65f, 1f),
+                      new Color(0.65f, 0.65f, 0.65f, 1f) }
     };
 
     private static int currentPlanetIndex = 0;

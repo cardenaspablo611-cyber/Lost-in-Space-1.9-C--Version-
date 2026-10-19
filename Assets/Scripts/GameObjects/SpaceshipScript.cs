@@ -390,6 +390,7 @@ public class SpaceshipScript : MonoBehaviour {
 
                     if (deadth) return;
                     deadth = true;
+                    lives = 0; // so the last heart disappears from the panel
 
                     rightLeft.sprite = null;
                     upDown.sprite = null;
