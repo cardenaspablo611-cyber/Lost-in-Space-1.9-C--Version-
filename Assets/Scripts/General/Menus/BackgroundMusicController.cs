@@ -56,7 +56,8 @@ public class BackgroundMusicController : MonoBehaviour {
 
         while (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
+            // Use unscaled time so music fade works even when timeScale = 0
+            elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / duration;
             float currentVolume = Mathf.Lerp(startVolume, targetVolume, t * t); // Acceleration effect by squaring t
             audioSource.volume = currentVolume;

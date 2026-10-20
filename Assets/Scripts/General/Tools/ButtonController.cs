@@ -44,8 +44,11 @@ public class ButtonController : MonoBehaviour {
 
         if (SceneManager.GetActiveScene().name == "Game") {
             
-            PauseController pauseInterface = F.GetScriptComponentName<PauseController>("User Interface Object");
-            Time.timeScale = pauseInterface.OriginalTimeScale;
+            // Skip timeScale restore during death sequence - stay frozen for door close
+            if (!SpaceshipScript.IsGameOver) {
+                PauseController pauseInterface = F.GetScriptComponentName<PauseController>("User Interface Object");
+                Time.timeScale = pauseInterface.OriginalTimeScale;
+            }
         }
 
         if (sceneName != SceneManager.GetActiveScene().name) {

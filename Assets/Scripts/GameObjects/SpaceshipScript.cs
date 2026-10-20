@@ -719,19 +719,20 @@ public class SpaceshipScript : MonoBehaviour {
         // Start door closing animation (doors use unscaled time)
         ButtonController buttonController = GameObject.Find("ControlButtonFunctions")?.GetComponent<ButtonController>();
         if (buttonController != null) {
-            // LoadScene starts door animation and waits 1.2s before switching
+            // LoadScene starts door animation and will load scene at 1.2s
             buttonController.StartCoroutine(buttonController.loadANewScene("GameOverMenu"));
         } else {
             Debug.LogError("[DeathSeq] ButtonController not found, cannot start door transition!");
             yield break;
         }
         
-        // Wait for doors to fully close (1.2s as in ButtonController)
-        yield return new WaitForSecondsRealtime(1.2f);
+        // Wait for doors to fully close (1.0s animation) + small buffer
+        yield return new WaitForSecondsRealtime(1.1f);
         
         Debug.Log("[DeathSeq] Doors closed, restoring camera and timeScale behind them");
         
         // Restore camera zoom and timeScale behind closed doors (not visible anymore)
+        // Do this at 1.1s, before scene loads at 1.2s
         mainCamera.orthographicSize = originalOrthographicSize;
         mainCamera.transform.position = originalMainCameraPosition;
         if (frameCamera != null) {
@@ -740,8 +741,8 @@ public class SpaceshipScript : MonoBehaviour {
         Time.timeScale = 1f;
         Time.fixedDeltaTime = originalFixedDeltaTime;
         
-        Debug.Log("[DeathSeq] END - Restored behind doors, scene switch in progress");
+        Debug.Log("[DeathSeq] END - Restored behind doors, scene switch imminent");
         
-        // Scene switch already started by LoadScene coroutine
+        // Scene will load in 0.1s (loadANewScene waits 1.2s total)
     }    
 }
