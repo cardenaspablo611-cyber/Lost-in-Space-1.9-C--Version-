@@ -161,10 +161,8 @@ public class Functions {
             currentSpeed = speed *(-1);
         }
 
-        // CRITICAL FIX: Multiply by Time.deltaTime so movement scales with Time.timeScale
-        // This makes stars/enemies/objects visibly slow down during death sequence
-        position.x += currentSpeed * lateralMovement * factor * Time.deltaTime;
-        position.y += currentSpeed * linearMovement * factor * Time.deltaTime;
+        position.x += currentSpeed * lateralMovement * factor;
+        position.y += currentSpeed * linearMovement * factor;
 
         return position;
     }

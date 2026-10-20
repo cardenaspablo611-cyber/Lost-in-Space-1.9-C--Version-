@@ -674,8 +674,8 @@ public class SpaceshipScript : MonoBehaviour {
             float easedT = 1f - Mathf.Pow(1f - t, 3f);
             
             // Update time scale - UNCLAMPED start, gradual to 0
+            // DON'T modify fixedDeltaTime - let FixedUpdate naturally run fewer times per second
             Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, easedT);
-            Time.fixedDeltaTime = originalFixedDeltaTime * Mathf.Max(Time.timeScale, 0.01f);
             
             // Log timeScale every frame for verification
             Debug.Log($"[DeathSeq] Frame t={t:F3} easedT={easedT:F3} TIME.TIMESCALE={Time.timeScale:F3}");
@@ -725,8 +725,8 @@ public class SpaceshipScript : MonoBehaviour {
             yield return null;
         }
 
+        // Final timeScale = 0 (full freeze)
         Time.timeScale = targetTimeScale;
-        Time.fixedDeltaTime = originalFixedDeltaTime * 0.01f;
         
         // Stop shake
         mainCamera.transform.position = originalMainCameraPosition;
