@@ -466,10 +466,10 @@ public class SpaceshipScript : MonoBehaviour {
                     // Run death sequence on a persistent GameObject (ControlButtonFunctions)
                     GameObject controlButtonFunctions = GameObject.Find("ControlButtonFunctions");
                     if (controlButtonFunctions != null) {
-                        MonoBehaviour persistentScript = controlButtonFunctions.GetComponent<ButtonController>();
-                        if (persistentScript != null) {
-                            persistentScript.StartCoroutine(SlowMotionDeathSequence(transform.position, explosionPrefab));
-                        } else {
+                    MonoBehaviour persistentScript = controlButtonFunctions.GetComponent<ButtonController>();
+                    if (persistentScript != null) {
+                        persistentScript.StartCoroutine(SlowMotionDeathSequence(transform.position, explosionPrefab, deathZoomTarget));
+                    } else {
                             Debug.LogError("[DeathSeq] ButtonController not found!");
                         }
                     } else {
@@ -597,7 +597,7 @@ public class SpaceshipScript : MonoBehaviour {
         Debug.Log("[DmgShake] END - Shake complete, cameras restored");
     }
 
-    public static IEnumerator SlowMotionDeathSequence(Vector3 shipPosition, GameObject explosionPrefab) {
+    public static IEnumerator SlowMotionDeathSequence(Vector3 shipPosition, GameObject explosionPrefab, float zoomTarget) {
         // This coroutine runs on a persistent GameObject (ControlButtonFunctions)
         // so it won't stop if the ship is disabled
         
@@ -647,10 +647,10 @@ public class SpaceshipScript : MonoBehaviour {
         Debug.Log($"[DeathSeq] Camera size={originalOrthographicSize}, death shake intensity={deathShakeIntensity} units");
         
         // Zoom via camera orthographicSize (not container scaling)
-        // Use the serialized deathZoomTarget (default 0.6 = 60% zoom in)
-        float targetOrthographicSize = originalOrthographicSize * deathZoomTarget;
+        // Use the passed zoomTarget parameter (e.g. 0.6 = 60% zoom in)
+        float targetOrthographicSize = originalOrthographicSize * zoomTarget;
         
-        Debug.Log($"[DeathSeq] Will zoom from ortho={originalOrthographicSize} to {targetOrthographicSize} (target factor={deathZoomTarget})");
+        Debug.Log($"[DeathSeq] Will zoom from ortho={originalOrthographicSize} to {targetOrthographicSize} (target factor={zoomTarget})");
         
         float elapsedTime = 0f;
         float lastLogTime = 0f;
