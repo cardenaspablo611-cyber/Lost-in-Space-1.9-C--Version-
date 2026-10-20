@@ -27,14 +27,30 @@ public class ButtonUseBuyAdmin : MonoBehaviour {
         }
     }
 
+    private int lastMoneyHave = -1;
+    private int lastMoneyCost = -1;
+    private bool lastBought = false;
+    private bool lastUse = false;
+
     private void Update () {
         
         spaceshipOpened = spaceshipAnimation.openSpaceship.GetComponent<InformationSpaceshipsScript>();
         
         var (score, bills, coins, enemiesTakenDown, hitsOnEnemies) = moneyAdmin.GetGeneralInfo();
         int allMoneyWhatYouHave = 100 * bills + coins; 
-        int allMoneyThatItCost = 100 * spaceshipOpened.spaceshipInformation.bills + spaceshipOpened.spaceshipInformation.coins; 
-        MoneyLogger.Log($"[ButtonUseBuyAdmin] Update: Player money={allMoneyWhatYouHave}, Spaceship cost={allMoneyThatItCost}, Bought={spaceshipOpened.spaceshipInformation.bought}, Use={spaceshipOpened.spaceshipInformation.use}");
+        int allMoneyThatItCost = 100 * spaceshipOpened.spaceshipInformation.bills + spaceshipOpened.spaceshipInformation.coins;
+        
+        // Only log when something changes, not every frame
+        if (allMoneyWhatYouHave != lastMoneyHave || allMoneyThatItCost != lastMoneyCost || 
+            spaceshipOpened.spaceshipInformation.bought != lastBought || 
+            spaceshipOpened.spaceshipInformation.use != lastUse) {
+            MoneyLogger.Log($"[ButtonUseBuyAdmin] Player money={allMoneyWhatYouHave}, Spaceship cost={allMoneyThatItCost}, Bought={spaceshipOpened.spaceshipInformation.bought}, Use={spaceshipOpened.spaceshipInformation.use}");
+            lastMoneyHave = allMoneyWhatYouHave;
+            lastMoneyCost = allMoneyThatItCost;
+            lastBought = spaceshipOpened.spaceshipInformation.bought;
+            lastUse = spaceshipOpened.spaceshipInformation.use;
+        }
+        
         if (spaceshipOpened.spaceshipInformation.bought) {
 
             buyScript.changeButtonState("selected");

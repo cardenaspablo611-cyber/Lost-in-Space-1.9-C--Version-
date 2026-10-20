@@ -13,6 +13,7 @@ public class RectangleAdministrator : MonoBehaviour {
     private float speed;
 
     private float YPosition;
+    private bool isAnimating = false;
 
     private void Start () {
 
@@ -20,10 +21,17 @@ public class RectangleAdministrator : MonoBehaviour {
 
         YPosition = transform.position.y;
 
+        // In Game scene, put doors on Frames layer so Frame Camera renders them (not zooming camera)
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Game") {
+            gameObject.layer = 12; // Frames layer
+        }
+
         Out();
     }
 
     public void Inside() {
+
+        if (isAnimating) return;
 
         StartCoroutine(MoveObjectWithAcceleration(endingYPosition,startingYPosition));
         GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayEffect("Door");
@@ -31,10 +39,13 @@ public class RectangleAdministrator : MonoBehaviour {
 
     public void Out() {
 
+        if (isAnimating) return;
+
         StartCoroutine(MoveObjectWithAcceleration(startingYPosition,endingYPosition));
     }
 
     private IEnumerator MoveObjectWithAcceleration(float startY, float endY) {
+        isAnimating = true;
         float elapsedTime = 0f;
 
         Vector3 start = new Vector3(transform.position.x , startY, transform.position.z);
@@ -50,8 +61,8 @@ public class RectangleAdministrator : MonoBehaviour {
             // Lerp the position based on the acceleration factor
             transform.position = Vector3.Lerp(start, end, accelerationFactor);
 
-            // Increment the elapsed time
-            elapsedTime += Time.deltaTime;
+            // Increment the elapsed time - use unscaled time so doors work at timeScale 0
+            elapsedTime += Time.unscaledDeltaTime;
 
             // Wait for the next frame
             yield return null;
@@ -59,6 +70,7 @@ public class RectangleAdministrator : MonoBehaviour {
 
         // Ensure the object reaches the final position
         transform.position = end;
+        isAnimating = false;
     }
 }
 

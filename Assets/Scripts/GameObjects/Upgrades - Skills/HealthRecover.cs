@@ -7,7 +7,7 @@ public class HealthRecover : MonoBehaviour {
     [SerializeField] private GameObject spaceshipAnimationPrefab;
     [SerializeField] private GameObject greenHeartAnimationPrefab;
 
-    private GameObject spaceshipAnimation;
+    private GameObject glowAnimation;
 
     private SpaceshipScript parentScript;
 
@@ -23,8 +23,8 @@ public class HealthRecover : MonoBehaviour {
 
     private void FixedUpdate() {
 
-        if (spaceshipAnimation != null) {
-            spaceshipAnimation.transform.position = new Vector3(transform.position.x, transform.position.y + 7.5f, 0f);
+        if (glowAnimation != null) {
+            glowAnimation.transform.position = transform.position;
         }
     }
 
@@ -32,20 +32,29 @@ public class HealthRecover : MonoBehaviour {
         yield return new WaitForSeconds(3);
 
         while (true) {
-            if (parentScript.Lives < 3) {
+            if (parentScript.Lives < 3 && !parentScript.Deadth) {
                 yield return new WaitForSeconds(40);
 
-                spaceshipAnimation = Instantiate(spaceshipAnimationPrefab, transform.position, Quaternion.identity) as GameObject;
-                spaceshipAnimation.transform.SetParent(gameObject.transform);
+                if (spaceshipAnimationPrefab != null) {
+                    glowAnimation = Instantiate(spaceshipAnimationPrefab, transform.position, Quaternion.identity) as GameObject;
+                    glowAnimation.transform.SetParent(gameObject.transform);
 
-                float time = spaceshipAnimation.GetComponent<AnimationScript>().TotalDurationTime;
+                    float time = glowAnimation.GetComponent<AnimationScript>().TotalDurationTime;
 
-                yield return new WaitForSeconds(time);
+                    yield return new WaitForSeconds(time);
+                } else {
+                    Debug.LogWarning("[HealthRecover] spaceshipAnimationPrefab is null on Tree Spaceship");
+                    yield return new WaitForSeconds(3);
+                }
 
                 parentScript.getAHeart();
 
-                GameObject greenHeart = Instantiate(greenHeartAnimationPrefab, transform.position, Quaternion.identity) as GameObject;
-                greenHeart.transform.SetParent(gameObject.transform);
+                if (greenHeartAnimationPrefab != null) {
+                    GameObject greenHeart = Instantiate(greenHeartAnimationPrefab, transform.position, Quaternion.identity) as GameObject;
+                    greenHeart.transform.SetParent(gameObject.transform);
+                } else {
+                    Debug.LogWarning("[HealthRecover] greenHeartAnimationPrefab is null on Tree Spaceship");
+                }
                 
             } else {
                 yield return null;

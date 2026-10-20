@@ -1,7 +1,25 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using F = Functions;
 
 public class MeteoriteScript : MonoBehaviour {
+
+    // Static counters that need reset on new game
+    public static int meteoritesDown;
+    public static int meteoritesHits;
+    private static int lastUsedSegment = -1;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void RegisterSceneLoadHandler() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        // Reset static counters when any scene loads
+        meteoritesDown = 0;
+        meteoritesHits = 0;
+        lastUsedSegment = -1;
+    }
 
 
     private Vector2 position;
@@ -25,10 +43,7 @@ public class MeteoriteScript : MonoBehaviour {
     private float minRotationSpeed = 20;
     private float maxRotationSpeed = 175;
 
-    public static int meteoritesDown;
-    public static int meteoritesHits;
     private bool resetMeteoritesDataOnPlayer = true;
-    private static int lastUsedSegment = -1;
 
     private SpaceParent space;
     private SpaceshipScript spaceship;
@@ -122,7 +137,7 @@ public class MeteoriteScript : MonoBehaviour {
             }
         }
 
-        if (collision.gameObject.CompareTag("Spaceship") && !spaceship.Immunity) {
+        if (collision.gameObject.CompareTag("Spaceship") && !spaceship.Immunity && !SpaceshipScript.IsGameOver) {
             spaceship.gotHitten();
             destroyArtificial = true;
         }
@@ -267,6 +282,10 @@ public class MeteoriteScript : MonoBehaviour {
 
     public void destroyExesMeteorite() {
         destroyArtificialDeatdh();
+    }
+
+    public GameObject GetDeathAnimationPrefab() {
+        return deathAnimationPrefab;
     }
 
     private void hitByUlty() {

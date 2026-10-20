@@ -37,6 +37,7 @@ public class GameFrames : MonoBehaviour {
 
         littleFrame.transform.localScale = scale;
         littleFrame.transform.position = position;
+        littleFrame.layer = 12; // Frames layer
 
         littleFrame.transform.SetParent(frameParent.transform);
     }
@@ -47,6 +48,7 @@ public class GameFrames : MonoBehaviour {
 
         bigFrame.transform.localScale = scale;
         bigFrame.transform.position = position;
+        bigFrame.layer = 12; // Frames layer
 
         bigFrame.transform.SetParent(frameParent.transform);
     }

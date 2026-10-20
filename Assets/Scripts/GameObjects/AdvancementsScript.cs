@@ -18,6 +18,8 @@ public class AdvancementsScript : MonoBehaviour {
     }
 
     private void FixedUpdate () {
+        if (SpaceshipScript.IsGameOver) return;
+        
         var (score, bills, coins, enemiesTakenDown, hitsOnEnemies) = moneyAdmin.GetTemporalInfo();
         // Only update enemies and hits, let PanellAdminScript handle score
         moneyAdmin.AddGameStats(0, MeteoriteScript.meteoritesDown - enemiesTakenDown, MeteoriteScript.meteoritesHits - hitsOnEnemies);

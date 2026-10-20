@@ -46,6 +46,8 @@ public class PlanetsAdminScript : MonoBehaviour {
 
     private void FixedUpdate() {
 
+        if (SpaceshipScript.IsGameOver) return;
+
         generatePlanet();
         checkForDestroyedMeteorites();
     }
@@ -137,6 +139,8 @@ public class PlanetsAdminScript : MonoBehaviour {
         Instantiate(planets[order]); // Generate the object based on the number
 
         tagOfSpawnedPlanet = planets[order].tag;
+
+        StarsScript.SetPlanetIndex(order);
 
         order += 1;
 

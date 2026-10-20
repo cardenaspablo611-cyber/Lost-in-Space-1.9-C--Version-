@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 using System;
 
 [System.Serializable]
@@ -13,78 +12,72 @@ public class GameData {
 }
 
 public class MoneyAdministratorScript : MonoBehaviour {
-    private string temporalPath;
-    private string generalPath;
+    // Session-only storage (resets when game is closed/restarted)
+    // This replaces File IO to support WebGL and ensures data only persists during play session
+    private static GameData temporalData = new GameData();
+    private static GameData generalData = new GameData();
 
     [SerializeField] private GameObject scoreTextPrefab;
     [HideInInspector] public GameObject ScoreTextPrefab { get { return scoreTextPrefab;}}
 
-
-    private void Awake() {
-
-        temporalPath = Path.Combine(System.Environment.CurrentDirectory, "Temporal.json");
-        generalPath = Path.Combine(System.Environment.CurrentDirectory, "General.json");
-        InitializeFiles();
+    /// <summary>
+    /// Called by SessionStateManager at game launch to reset all money data.
+    /// Ensures Editor and builds start with clean state.
+    /// </summary>
+    public static void ResetSessionData() {
+        temporalData = new GameData();
+        generalData = new GameData();
     }
 
-    private void InitializeFiles() {
-        if (!File.Exists(temporalPath)) {
-            GameData temporalData = new GameData();
-            SaveGameData(temporalData, temporalPath);
-        }
-        if (!File.Exists(generalPath)) {
-            GameData generalData = new GameData();
-            SaveGameData(generalData, generalPath);
+    private void SaveGameData(GameData data, bool isTemporal) {
+        // In-memory save - no file IO needed for session persistence
+        if (isTemporal) {
+            temporalData = data;
+        } else {
+            generalData = data;
         }
     }
 
-    private void SaveGameData(GameData data, string filePath) {
-        string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(filePath, json);
-    }
-
-    private GameData LoadGameData(string filePath) {
-        if (File.Exists(filePath)) {
-            string json = File.ReadAllText(filePath);
-            return JsonUtility.FromJson<GameData>(json);
+    private GameData LoadGameData(bool isTemporal) {
+        if (isTemporal) {
+            return temporalData;
+        } else {
+            return generalData;
         }
-        return new GameData();
     }
 
     public void AddCoins(int amount) { // For General and Temporal Money Data
-        GameData temporalData = LoadGameData(temporalPath);
-        temporalData.Coins += amount;
-        SaveGameData(temporalData, temporalPath);
+        GameData tempData = LoadGameData(true);
+        tempData.Coins += amount;
+        SaveGameData(tempData, true);
 
-        GameData generalData = LoadGameData(generalPath);
-        generalData.Coins += amount;
-        SaveGameData(generalData, generalPath);
+        GameData genData = LoadGameData(false);
+        genData.Coins += amount;
+        SaveGameData(genData, false);
     }
 
     public void AddBills(int amount) { // For General and Temporal Money Data
-        GameData temporalData = LoadGameData(temporalPath);
-        temporalData.Bills += amount;
-        SaveGameData(temporalData, temporalPath);
+        GameData tempData = LoadGameData(true);
+        tempData.Bills += amount;
+        SaveGameData(tempData, true);
         
-        GameData generalData = LoadGameData(generalPath);
-        generalData.Bills += amount;
-        SaveGameData(generalData, generalPath);
+        GameData genData = LoadGameData(false);
+        genData.Bills += amount;
+        SaveGameData(genData, false);
     }
 
     public void SubtractCoins(int amount) { // Only for the General Money Data
-    
-        GameData generalData = LoadGameData(generalPath);
-        if (generalData.Coins <= 0) return;
-        generalData.Coins = Mathf.Max(0, generalData.Coins - amount);
-        SaveGameData(generalData, generalPath);
+        GameData genData = LoadGameData(false);
+        if (genData.Coins <= 0) return;
+        genData.Coins = Mathf.Max(0, genData.Coins - amount);
+        SaveGameData(genData, false);
     }
 
     public void SubtractBills(int amount) { // Only for the General Money Data
-
-        GameData generalData = LoadGameData(generalPath);
-        if (generalData.Bills <= 0) return;
-        generalData.Bills = Mathf.Max(0, generalData.Bills - amount);
-        SaveGameData(generalData, generalPath);
+        GameData genData = LoadGameData(false);
+        if (genData.Bills <= 0) return;
+        genData.Bills = Mathf.Max(0, genData.Bills - amount);
+        SaveGameData(genData, false);
     }
     
     public void AddGameStats(int score, int enemiesTakenDown, int hitsOnEnemies) {
@@ -108,36 +101,36 @@ public class MoneyAdministratorScript : MonoBehaviour {
             textMesh.color = textColor;
         }
 
-        GameData temporalData = LoadGameData(temporalPath);
-        temporalData.Score += score;
-        temporalData.EnemiesTakenDown += enemiesTakenDown;
-        temporalData.HitsOnEnemies += hitsOnEnemies;
-        SaveGameData(temporalData, temporalPath);
+        GameData tempData = LoadGameData(true);
+        tempData.Score += score;
+        tempData.EnemiesTakenDown += enemiesTakenDown;
+        tempData.HitsOnEnemies += hitsOnEnemies;
+        SaveGameData(tempData, true);
         
-        GameData generalData = LoadGameData(generalPath);
-        generalData.Score += score;
-        generalData.EnemiesTakenDown += enemiesTakenDown;
-        generalData.HitsOnEnemies += hitsOnEnemies;
-        SaveGameData(generalData, generalPath);
+        GameData genData = LoadGameData(false);
+        genData.Score += score;
+        genData.EnemiesTakenDown += enemiesTakenDown;
+        genData.HitsOnEnemies += hitsOnEnemies;
+        SaveGameData(genData, false);
     }
     
     public void ResetTemporal() {
         GameData data = new GameData();
-        SaveGameData(data, temporalPath);
+        SaveGameData(data, true);
     }
     
     public void ResetGeneral() {
         GameData data = new GameData();
-        SaveGameData(data, generalPath);
+        SaveGameData(data, false);
     }
     
     public (int Score, int Bills, int Coins, int EnemiesTakenDown, int HitsOnEnemies) GetTemporalInfo() {
-        GameData data = LoadGameData(temporalPath);
+        GameData data = LoadGameData(true);
         return (data.Score, data.Bills, data.Coins, data.EnemiesTakenDown, data.HitsOnEnemies);
     }
     
     public (int Score, int Bills, int Coins, int EnemiesTakenDown, int HitsOnEnemies) GetGeneralInfo() {
-        GameData data = LoadGameData(generalPath);
+        GameData data = LoadGameData(false);
         return (data.Score, data.Bills, data.Coins, data.EnemiesTakenDown, data.HitsOnEnemies);
     }
 

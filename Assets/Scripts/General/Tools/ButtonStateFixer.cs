@@ -11,11 +11,15 @@ public class ButtonStateFixer : MonoBehaviour, IPointerEnterHandler, IPointerExi
     
     private void Start() {
         buttonImage = GetComponent<Image>();
-        
-        // Set initial sprite
-        if (buttonImage != null && normalSprite != null) {
-            buttonImage.sprite = normalSprite;
-        }
+        ResetToNormal();
+    }
+
+    private void OnEnable() {
+        ResetToNormal();
+        DeselectButton();
+    }
+
+    private void OnDisable() {
     }
     
     public void OnPointerEnter(PointerEventData eventData) {
@@ -25,8 +29,22 @@ public class ButtonStateFixer : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
     
     public void OnPointerExit(PointerEventData eventData) {
+        ResetToNormal();
+    }
+
+    public void OnClick() {
+        DeselectButton();
+    }
+
+    private void ResetToNormal() {
         if (buttonImage != null && normalSprite != null) {
             buttonImage.sprite = normalSprite;
+        }
+    }
+
+    private void DeselectButton() {
+        if (EventSystem.current != null) {
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 } 

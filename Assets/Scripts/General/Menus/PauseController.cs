@@ -32,7 +32,7 @@ public class PauseController : MonoBehaviour {
     private void Update() {
 
         if (noMore) {
-            if (userInterface.P || userInterface.Escape) {
+            if (!spaceship.Deadth && (userInterface.P || userInterface.Escape)) {
                 itsPaused = !itsPaused;
 
                 if (itsPaused) {

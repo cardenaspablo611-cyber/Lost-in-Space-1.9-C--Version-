@@ -52,6 +52,7 @@ public class PanellAdminScript : MonoBehaviour {
     // -- Score -- //
     private float scoreCooldownTime = 1f;
     private OmegaCooldown scoreCooldown;
+    private int scoreMultiplier = 1;
 
     private MoneyAdministratorScript moneyAdmin;
 
@@ -126,9 +127,10 @@ public class PanellAdminScript : MonoBehaviour {
             return;
         }
 
-        if (scoreCooldown.coolDownOver()) {
+        // Don't add score if game is over
+        if (!SpaceshipScript.IsGameOver && scoreCooldown.coolDownOver()) {
             var (currentScore, _, _, _, _) = moneyAdmin.GetTemporalInfo();
-            moneyAdmin.AddGameStats(1, 0, 0); // Add 1 to score
+            moneyAdmin.AddGameStats(1 * scoreMultiplier, 0, 0); // Add 1 to score (x2 while upSideDown is active)
         }
     }
 
@@ -190,8 +192,14 @@ public class PanellAdminScript : MonoBehaviour {
     }
 
     public void addScore(int amount) {
+        int finalAmount = amount;
+        
+        if (amount > 0) {
+            finalAmount = amount * scoreMultiplier;
+        }
+        
         var (currentScore, _, _, _, _) = moneyAdmin.GetTemporalInfo();
-        int newScore = currentScore + amount;
+        int newScore = currentScore + finalAmount;
         
         if (newScore < 0) {
             newScore = 0;
@@ -199,6 +207,10 @@ public class PanellAdminScript : MonoBehaviour {
         
         int scoreDifference = newScore - currentScore;
         moneyAdmin.AddGameStats(scoreDifference, 0, 0);
+    }
+
+    public void SetScoreMultiplier(int multiplier) {
+        scoreMultiplier = multiplier;
     }
 
     private void afterpauseCounterBool() {
@@ -213,6 +225,11 @@ public class PanellAdminScript : MonoBehaviour {
     }
 
     private void updateTimeTransition() {
+        // Don't interfere with death sequence timeScale changes
+        if (SpaceshipScript.IsGameOver) {
+            return;
+        }
+        
         if (isTransitioningTime) {
             currentTimeScale = Mathf.Lerp(currentTimeScale, originalTimeScale, Time.unscaledDeltaTime * timeScaleTransitionSpeed);
             Time.timeScale = currentTimeScale;
@@ -223,6 +240,10 @@ public class PanellAdminScript : MonoBehaviour {
                 isTransitioningTime = false;
             }
         }
+    }
+
+    public void StopTimeScaleTransitions() {
+        isTransitioningTime = false;
     }
 
     public void afterPausing(float givenTime) {

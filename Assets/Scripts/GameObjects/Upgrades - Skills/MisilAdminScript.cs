@@ -20,8 +20,11 @@ public class MisilAdminScript : MonoBehaviour {
 
         while (true) {
 
-            generateMisile(bulletStartingPointX,bulletStartingPointY);
-            generateMisile(-bulletStartingPointX,bulletStartingPointY);
+            SpaceshipScript spaceship = GetComponent<SpaceshipScript>();
+            if (spaceship != null && !spaceship.Deadth) {
+                generateMisile(bulletStartingPointX,bulletStartingPointY);
+                generateMisile(-bulletStartingPointX,bulletStartingPointY);
+            }
             
             yield return new WaitForSeconds(20);
         }

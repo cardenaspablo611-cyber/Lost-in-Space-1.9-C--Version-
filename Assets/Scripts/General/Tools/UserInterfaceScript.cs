@@ -44,6 +44,20 @@ public class UserInterfaceScript : MonoBehaviour {
 
     private void Update() {
 
+        // Block all input when game is over (death sequence, doors closing)
+        if (SpaceshipScript.IsGameOver) {
+            up = false;
+            down = false;
+            right = false;
+            left = false;
+            p = false;
+            space = false;
+            escape = false;
+            f3 = false;
+            j = false;
+            return;
+        }
+
         up = false;
         down = false;
         right = false;

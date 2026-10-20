@@ -15,6 +15,16 @@ public class ButtonController : MonoBehaviour {
 
     [SerializeField] private SceneData sceneData;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void RegisterSceneLoadHandler() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        Time.timeScale = 1f;
+    }
+
     private void Start()
     {
         moneyAdmin = FindFirstObjectByType<MoneyAdministratorScript>();
@@ -34,8 +44,11 @@ public class ButtonController : MonoBehaviour {
 
         if (SceneManager.GetActiveScene().name == "Game") {
             
-            PauseController pauseInterface = F.GetScriptComponentName<PauseController>("User Interface Object");
-            Time.timeScale = pauseInterface.OriginalTimeScale;
+            // Skip timeScale restore during death sequence - stay frozen for door close
+            if (!SpaceshipScript.IsGameOver) {
+                PauseController pauseInterface = F.GetScriptComponentName<PauseController>("User Interface Object");
+                Time.timeScale = pauseInterface.OriginalTimeScale;
+            }
         }
 
         if (sceneName != SceneManager.GetActiveScene().name) {
