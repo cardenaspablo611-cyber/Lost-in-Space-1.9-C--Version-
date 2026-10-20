@@ -407,9 +407,6 @@ public class SpaceshipScript : MonoBehaviour {
 
                 admin.instantiateTakeDamageObject();
                 
-                // Screen shake on damage
-                StartCoroutine(DamageScreenShake());
-
                 if (lives == 1) {
 
                     if (deadth) return;
@@ -474,6 +471,11 @@ public class SpaceshipScript : MonoBehaviour {
                     }
 
                 } else if (!inmunity) {
+                    
+                    Debug.Log("[DmgShake] Non-lethal hit - triggering damage shake");
+                    // Screen shake on damage (non-lethal hits only)
+                    StartCoroutine(DamageScreenShake());
+                    
                     lives -= 1;
                 
                     position = startingPosition;
@@ -481,6 +483,10 @@ public class SpaceshipScript : MonoBehaviour {
                     instantiateinmunity();
                 }
             } else {
+                // Shield absorbed hit
+                Debug.Log("[DmgShake] Shield absorbed hit - triggering damage shake");
+                // Screen shake even when shield absorbs
+                StartCoroutine(DamageScreenShake());
 
                 shield = false;
 
@@ -540,7 +546,7 @@ public class SpaceshipScript : MonoBehaviour {
     }
 
     private IEnumerator DamageScreenShake() {
-        Debug.Log("[DmgShake] START - Damage screen shake triggered");
+        Debug.Log("[DmgShake] START - Damage shake triggered on non-lethal hit");
         
         Camera mainCamera = Camera.main;
         if (mainCamera == null) {
@@ -552,18 +558,18 @@ public class SpaceshipScript : MonoBehaviour {
         
         Vector3 originalMainPosition = mainCamera.transform.position;
         Vector3 originalFramePosition = frameCamera != null ? frameCamera.transform.position : Vector3.zero;
-        float duration = 0.2f; // Short shake
-        // Scale intensity relative to orthographicSize for visibility
-        // ~1.5% of orthographic size (if size is 450, shake is ~6.75 units)
-        float intensity = mainCamera.orthographicSize * 0.015f;
+        
+        // Fixed intensity: 1.2-1.5 world units (clearly visible but smaller than death shake)
+        float intensity = 1.35f;
+        float duration = 0.3f; // Slightly longer than before for visibility
         float elapsed = 0f;
         
-        Debug.Log($"[DmgShake] duration={duration}s, orthoSize={mainCamera.orthographicSize}, scaled intensity={intensity}, origPos={originalMainPosition}");
+        Debug.Log($"[DmgShake] intensity={intensity} units, duration={duration}s, origMainPos={originalMainPosition}, origFramePos={originalFramePosition}");
         
         while (elapsed < duration) {
             elapsed += Time.unscaledDeltaTime;
             float t = elapsed / duration;
-            float shakeAmount = intensity * (1f - t); // Decay quickly
+            float shakeAmount = intensity * (1f - t); // Decay over time
             
             Vector3 shake = new Vector3(
                 Random.Range(-shakeAmount, shakeAmount),
@@ -628,12 +634,11 @@ public class SpaceshipScript : MonoBehaviour {
         Vector3 originalFrameCameraPosition = frameCamera != null ? frameCamera.transform.position : Vector3.zero;
         float originalOrthographicSize = mainCamera.orthographicSize;
         
-        // Calculate shake intensities relative to camera size for visibility
-        // Damage shake: ~1.5-2% of ortho size, Death shake: ~4% of ortho size
-        float deathShakeIntensity = originalOrthographicSize * 0.04f; // 4% of view
+        // Death shake: Fixed 2.5 world units (as in 8108446 - clearly visible)
+        float deathShakeIntensity = 2.5f;
         float shakeDecayPower = 2f;
         
-        Debug.Log($"[DeathSeq] Camera size={originalOrthographicSize}, shake intensity scaled to {deathShakeIntensity}");
+        Debug.Log($"[DeathSeq] Camera size={originalOrthographicSize}, death shake intensity={deathShakeIntensity} units");
         
         // Zoom via camera orthographicSize (not container scaling)
         float targetOrthographicSize = originalOrthographicSize * 0.6f; // Zoom to 60% of original view
