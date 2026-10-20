@@ -19,7 +19,19 @@ public class StarsScript : MonoBehaviour {
     // Each planet has a palette; every star picks one color from it at random,
     // so Techno stars come out red, blue or purple like its enemies.
     private static readonly Color[][] planetStarPalettes = new Color[][] {
-        new Color[] { new Color(1f, 1f, 1f, 1f) },                                  // 1 Destroyed - white
+        // 1 Destroyed - browns/café from desert enemies + aquamarine accents + white
+        new Color[] {
+            new Color(0.36f, 0.29f, 0.17f, 1f), // Brown #5c4b2b
+            new Color(0.66f, 0.56f, 0.36f, 1f), // Brown #a98f5d
+            new Color(0.62f, 0.52f, 0.33f, 1f), // Brown #9e8554
+            new Color(0.36f, 0.29f, 0.17f, 1f), // Brown #5c4b2b (weighted)
+            new Color(0.66f, 0.56f, 0.36f, 1f), // Brown #a98f5d (weighted)
+            new Color(0.62f, 0.52f, 0.33f, 1f), // Brown #9e8554 (weighted)
+            new Color(0.00f, 0.35f, 0.44f, 1f), // Aquamarine #005a70
+            new Color(0.27f, 0.53f, 0.60f, 1f), // Aqua #448899
+            new Color(1f, 1f, 1f, 1f),           // White
+            new Color(1f, 1f, 1f, 1f)            // White (weighted)
+        },
         new Color[] { new Color(1f, 0.78f, 0.3f, 1f) },                             // 2 Desert - yellow/orange
         new Color[] { new Color(0.45f, 0.62f, 1f, 1f),                              // 3 Techno - mostly blue,
                       new Color(0.45f, 0.62f, 1f, 1f),                              //            then purple,

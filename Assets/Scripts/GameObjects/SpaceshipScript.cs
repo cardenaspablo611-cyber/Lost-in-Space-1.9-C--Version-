@@ -116,9 +116,9 @@ public class SpaceshipScript : MonoBehaviour {
     // death //
     private bool deadth;
     
-    // Death zoom target: fraction of original orthographic size (e.g. 0.6 = 60% zoom in)
+    // Death zoom target: fraction of original orthographic size (e.g. 0.75 = 75% = less zoom)
     // Tune this value to adjust death zoom amount. Smaller = more zoom. Range: 0.5-0.8 recommended.
-    [SerializeField] [Range(0.4f, 1.0f)] private float deathZoomTarget = 0.6f;
+    [SerializeField] [Range(0.4f, 1.0f)] private float deathZoomTarget = 0.75f;
 
     private PanellAdminScript panell;
     private int amountPerDeadth = -100;
@@ -646,11 +646,12 @@ public class SpaceshipScript : MonoBehaviour {
         
         Debug.Log($"[DeathSeq] Camera size={originalOrthographicSize}, death shake intensity={deathShakeIntensity} units");
         
-        // Zoom via camera orthographicSize (not container scaling)
-        // Use the passed zoomTarget parameter (e.g. 0.6 = 60% zoom in)
+        // Zoom via camera orthographicSize and move toward ship death position
         float targetOrthographicSize = originalOrthographicSize * zoomTarget;
+        // Calculate target camera position (move toward ship, with same Z)
+        Vector3 targetCameraPosition = new Vector3(shipPosition.x, shipPosition.y, originalMainCameraPosition.z);
         
-        Debug.Log($"[DeathSeq] Will zoom from ortho={originalOrthographicSize} to {targetOrthographicSize} (target factor={zoomTarget})");
+        Debug.Log($"[DeathSeq] Will zoom from ortho={originalOrthographicSize} to {targetOrthographicSize} (factor={zoomTarget}), moving camera toward ship at {shipPosition}");
         
         float elapsedTime = 0f;
         float lastLogTime = 0f;
@@ -675,8 +676,9 @@ public class SpaceshipScript : MonoBehaviour {
             Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, easedT);
             Time.fixedDeltaTime = originalFixedDeltaTime * Mathf.Max(Time.timeScale, 0.01f);
             
-            // Zoom gameplay camera via orthographicSize (frame camera never zooms)
+            // Zoom gameplay camera via orthographicSize and move toward ship death position
             mainCamera.orthographicSize = Mathf.Lerp(originalOrthographicSize, targetOrthographicSize, easedT);
+            Vector3 baseCameraPosition = Vector3.Lerp(originalMainCameraPosition, targetCameraPosition, easedT);
             
             // Screen shake (both cameras) - decays over time
             float shakeAmount = deathShakeIntensity * Mathf.Pow(1f - t, shakeDecayPower);
@@ -686,7 +688,7 @@ public class SpaceshipScript : MonoBehaviour {
                 0f
             );
             
-            mainCamera.transform.position = originalMainCameraPosition + shake;
+            mainCamera.transform.position = baseCameraPosition + shake;
             if (frameCamera != null) {
                 frameCamera.transform.position = originalFrameCameraPosition + shake;
             }

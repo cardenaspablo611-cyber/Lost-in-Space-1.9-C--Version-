@@ -21,6 +21,11 @@ public class RectangleAdministrator : MonoBehaviour {
 
         YPosition = transform.position.y;
 
+        // In Game scene, put doors on Frames layer so Frame Camera renders them (not zooming camera)
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Game") {
+            gameObject.layer = 12; // Frames layer
+        }
+
         Out();
     }
 
