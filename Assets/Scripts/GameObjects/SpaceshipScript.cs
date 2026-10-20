@@ -440,6 +440,15 @@ public class SpaceshipScript : MonoBehaviour {
                         shieldChildObject.SetActive(false);
                     }
                     
+                    // Hide power-up indicator sprite (bullet/upSideDown/bulletRush visuals)
+                    extrasBehaviorSpacehip extrasVisual = GetComponent<extrasBehaviorSpacehip>();
+                    if (extrasVisual != null) {
+                        SpriteRenderer extrasSpriteRenderer = extrasVisual.GetComponent<SpriteRenderer>();
+                        if (extrasSpriteRenderer != null) {
+                            extrasSpriteRenderer.sprite = null;
+                        }
+                    }
+                    
                     // NOTE: Don't call StopAllCoroutines here as it would stop DamageScreenShake
                     // which was just started above. Power-up coroutines will be stopped when
                     // scene changes anyway.
@@ -541,10 +550,12 @@ public class SpaceshipScript : MonoBehaviour {
         
         Vector3 originalPosition = mainCamera.transform.position;
         float duration = 0.2f; // Short shake
-        float intensity = 0.8f; // Smaller than death shake
+        // Scale intensity relative to orthographicSize for visibility
+        // ~1.5% of orthographic size (if size is 450, shake is ~6.75 units)
+        float intensity = mainCamera.orthographicSize * 0.015f;
         float elapsed = 0f;
         
-        Debug.Log($"[DmgShake] Starting shake: duration={duration}s, intensity={intensity}, origPos={originalPosition}");
+        Debug.Log($"[DmgShake] duration={duration}s, orthoSize={mainCamera.orthographicSize}, scaled intensity={intensity}, origPos={originalPosition}");
         
         while (elapsed < duration) {
             elapsed += Time.unscaledDeltaTime;
@@ -587,12 +598,12 @@ public class SpaceshipScript : MonoBehaviour {
         float freezeHoldDuration = 0.4f;
 
         float originalFixedDeltaTime = Time.fixedDeltaTime;
-        // CRITICAL: Game might be running at 200% speed (timeScale = 2.0)
-        // We want to slow from NORMAL speed (1.0) to 0, not from 200% to 0
-        float startTimeScale = Mathf.Min(Time.timeScale, 1.0f);
-        Debug.Log($"[DeathSeq] Captured timeScale: actual={Time.timeScale}, clamped start={startTimeScale}");
+        // Start from CURRENT speed (e.g. 200% = 2.0) and ramp gradually to 0
+        // Do NOT clamp - Pablo wants to see 200->150->100->50->20->0
+        float startTimeScale = Time.timeScale;
+        Debug.Log($"[DeathSeq] Starting slowdown from timeScale={startTimeScale} to 0 over {slowdownDuration}s");
         
-        // Get the main camera for shake AND zoom
+        // Get the main camera
         Camera mainCamera = Camera.main;
         if (mainCamera == null) {
             Debug.LogError("[DeathSeq] Camera.main is null!");
@@ -601,13 +612,29 @@ public class SpaceshipScript : MonoBehaviour {
         
         Vector3 originalCameraPosition = mainCamera.transform.position;
         float originalOrthographicSize = mainCamera.orthographicSize;
-        float targetOrthographicSize = originalOrthographicSize * 0.6f; // Zoom to 60% (smaller = more zoomed in)
         
-        Debug.Log($"[DeathSeq] Camera setup: origSize={originalOrthographicSize}, targetSize={targetOrthographicSize}, origPos={originalCameraPosition}");
-        
-        // Camera shake parameters
-        float shakeIntensity = 2.5f;
+        // Calculate shake intensities relative to camera size for visibility
+        // Damage shake: ~1.5-2% of ortho size, Death shake: ~4% of ortho size
+        float deathShakeIntensity = originalOrthographicSize * 0.04f; // 4% of view
         float shakeDecayPower = 2f;
+        
+        Debug.Log($"[DeathSeq] Camera size={originalOrthographicSize}, shake intensity scaled to {deathShakeIntensity}");
+        
+        // Find gameplay containers to zoom (scale them, not the camera)
+        GameObject spaceParent = GameObject.Find("Space - Parent");
+        GameObject planetsAdmin = GameObject.Find("PlanetsAdmin");
+        GameObject admin = GameObject.Find("Admin");
+        
+        Vector3 origSpaceScale = spaceParent != null ? spaceParent.transform.localScale : Vector3.one;
+        Vector3 origSpacePos = spaceParent != null ? spaceParent.transform.position : Vector3.zero;
+        Vector3 origPlanetsScale = planetsAdmin != null ? planetsAdmin.transform.localScale : Vector3.one;
+        Vector3 origPlanetsPos = planetsAdmin != null ? planetsAdmin.transform.position : Vector3.zero;
+        Vector3 origAdminScale = admin != null ? admin.transform.localScale : Vector3.one;
+        Vector3 origAdminPos = admin != null ? admin.transform.position : Vector3.zero;
+        
+        float zoomScale = 1.67f; // 1/0.6 = zoom to 60% view
+        
+        Debug.Log($"[DeathSeq] Found containers: Space={spaceParent != null}, Planets={planetsAdmin != null}, Admin={admin != null}");
         
         float elapsedTime = 0f;
         float lastLogTime = 0f;
@@ -617,43 +644,52 @@ public class SpaceshipScript : MonoBehaviour {
         if (panellAdmin != null) {
             panellAdmin.StopTimeScaleTransitions();
             Debug.Log("[DeathSeq] Stopped PanellAdmin timeScale transitions");
-        } else {
-            Debug.LogWarning("[DeathSeq] PanellAdmin not found!");
         }
 
-        // Slow down to complete freeze with camera shake and zoom
+        // Slow down with camera shake and gameplay zoom (NOT camera zoom)
+        // Use EASE-OUT curve for gradual visible slowdown
         while (elapsedTime < slowdownDuration) {
             elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / slowdownDuration;
             
-            // Smoothstep ease (smooth start and end)
-            float easedT = t * t * (3f - 2f * t);
+            // Ease-out cubic: fast start, slow end - visibly gradual
+            float easedT = 1f - Mathf.Pow(1f - t, 3f);
             
-            // Update time scale - gradually slow from start to 0
+            // Update time scale - UNCLAMPED start, gradual to 0
             Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, easedT);
             Time.fixedDeltaTime = originalFixedDeltaTime * Mathf.Max(Time.timeScale, 0.01f);
             
-            // Camera zoom (reduce orthographicSize to zoom in)
-            float currentSize = Mathf.Lerp(originalOrthographicSize, targetOrthographicSize, easedT);
-            mainCamera.orthographicSize = currentSize;
+            // Scale gameplay containers toward zoom (leave frame alone)
+            float currentScale = Mathf.Lerp(1f, zoomScale, easedT);
+            if (spaceParent != null) {
+                spaceParent.transform.localScale = origSpaceScale * currentScale;
+                Vector3 offset = shipPosition - origSpacePos;
+                spaceParent.transform.position = origSpacePos + offset * (currentScale - 1f);
+            }
+            if (planetsAdmin != null) {
+                planetsAdmin.transform.localScale = origPlanetsScale * currentScale;
+                Vector3 offset = shipPosition - origPlanetsPos;
+                planetsAdmin.transform.position = origPlanetsPos + offset * (currentScale - 1f);
+            }
+            if (admin != null) {
+                admin.transform.localScale = origAdminScale * currentScale;
+                Vector3 offset = shipPosition - origAdminPos;
+                admin.transform.position = origAdminPos + offset * (currentScale - 1f);
+            }
             
-            // Move camera toward ship position
-            Vector3 targetCameraPos = new Vector3(shipPosition.x, shipPosition.y, originalCameraPosition.z);
-            Vector3 zoomedCameraPos = Vector3.Lerp(originalCameraPosition, targetCameraPos, easedT);
-            
-            // Camera shake (strongest at start, decaying over time)
-            float shakeAmount = shakeIntensity * Mathf.Pow(1f - t, shakeDecayPower);
+            // Camera shake (strongest at start, decaying)
+            float shakeAmount = deathShakeIntensity * Mathf.Pow(1f - t, shakeDecayPower);
             Vector3 shake = new Vector3(
                 Random.Range(-shakeAmount, shakeAmount),
                 Random.Range(-shakeAmount, shakeAmount),
                 0f
             );
             
-            mainCamera.transform.position = zoomedCameraPos + shake;
+            mainCamera.transform.position = originalCameraPosition + shake;
             
             // Log every 0.5 seconds
             if (elapsedTime - lastLogTime >= 0.5f) {
-                Debug.Log($"[DeathSeq] t={t:F2} timeScale={Time.timeScale:F2} camSize={currentSize:F1} shake={shakeAmount:F2}");
+                Debug.Log($"[DeathSeq] t={t:F2} timeScale={Time.timeScale:F2} scale={currentScale:F2} shake={shakeAmount:F1}");
                 lastLogTime = elapsedTime;
             }
             
@@ -663,8 +699,8 @@ public class SpaceshipScript : MonoBehaviour {
         Time.timeScale = targetTimeScale;
         Time.fixedDeltaTime = originalFixedDeltaTime * 0.01f;
         
-        // Stop shake, keep zoom
-        mainCamera.transform.position = new Vector3(shipPosition.x, shipPosition.y, originalCameraPosition.z);
+        // Stop shake
+        mainCamera.transform.position = originalCameraPosition;
         
         Debug.Log($"[DeathSeq] Slowdown complete, entering freeze hold");
 
@@ -672,8 +708,19 @@ public class SpaceshipScript : MonoBehaviour {
         yield return new WaitForSecondsRealtime(freezeHoldDuration);
 
         // Restore everything
+        if (spaceParent != null) {
+            spaceParent.transform.localScale = origSpaceScale;
+            spaceParent.transform.position = origSpacePos;
+        }
+        if (planetsAdmin != null) {
+            planetsAdmin.transform.localScale = origPlanetsScale;
+            planetsAdmin.transform.position = origPlanetsPos;
+        }
+        if (admin != null) {
+            admin.transform.localScale = origAdminScale;
+            admin.transform.position = origAdminPos;
+        }
         mainCamera.transform.position = originalCameraPosition;
-        mainCamera.orthographicSize = originalOrthographicSize;
         Time.timeScale = 1f;
         Time.fixedDeltaTime = originalFixedDeltaTime;
         
