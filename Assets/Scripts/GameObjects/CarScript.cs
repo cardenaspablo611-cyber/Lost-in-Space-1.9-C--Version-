@@ -40,7 +40,7 @@ public class CarScript : MonoBehaviour {
     private void carMovement() {
 
         if (inMotion) {
-            position.x += speed;
+            position.x += speed * Time.deltaTime;
             transform.position = position;
         }        
     }

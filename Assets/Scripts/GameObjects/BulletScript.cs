@@ -45,10 +45,10 @@ public class BulletScript : MonoBehaviour {
     private void bulletMovement() {
 
         if (lateralMovement != 0) {
-            position.x += speed * lateralMovement;
+            position.x += speed * lateralMovement * Time.deltaTime;
         }
         
-        position.y += speed;
+        position.y += speed * Time.deltaTime;
         transform.position = position;
     }
 

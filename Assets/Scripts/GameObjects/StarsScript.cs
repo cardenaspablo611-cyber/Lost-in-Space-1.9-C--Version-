@@ -20,27 +20,28 @@ public class StarsScript : MonoBehaviour {
     // so Techno stars come out red, blue or purple like its enemies.
     private static readonly Color[][] planetStarPalettes = new Color[][] {
         // 1 Destroyed - browns/café (75%) + aquamarine (10%) + white (15%)
+        // 15 browns + 2 aquamarines + 3 whites = 20 total
         new Color[] {
             new Color(0.36f, 0.29f, 0.17f, 1f), // Brown dark #5c4b2b
             new Color(0.66f, 0.56f, 0.36f, 1f), // Brown light #a98f5d
             new Color(0.62f, 0.52f, 0.33f, 1f), // Brown medium #9e8554
-            new Color(0.36f, 0.29f, 0.17f, 1f), // Brown dark (weight)
-            new Color(0.66f, 0.56f, 0.36f, 1f), // Brown light (weight)
-            new Color(0.62f, 0.52f, 0.33f, 1f), // Brown medium (weight)
             new Color(0.55f, 0.45f, 0.28f, 1f), // Brown warm #8c7347
-            new Color(0.55f, 0.45f, 0.28f, 1f), // Brown warm (weight)
-            new Color(0.36f, 0.29f, 0.17f, 1f), // Brown dark (weight)
-            new Color(0.66f, 0.56f, 0.36f, 1f), // Brown light (weight)
-            new Color(0.62f, 0.52f, 0.33f, 1f), // Brown medium (weight)
-            new Color(0.55f, 0.45f, 0.28f, 1f), // Brown warm (weight)
-            new Color(0.36f, 0.29f, 0.17f, 1f), // Brown dark (weight)
-            new Color(0.66f, 0.56f, 0.36f, 1f), // Brown light (weight)
-            new Color(0.62f, 0.52f, 0.33f, 1f), // Brown medium (weight) = 75%
+            new Color(0.36f, 0.29f, 0.17f, 1f), // Brown dark
+            new Color(0.66f, 0.56f, 0.36f, 1f), // Brown light
+            new Color(0.62f, 0.52f, 0.33f, 1f), // Brown medium
+            new Color(0.55f, 0.45f, 0.28f, 1f), // Brown warm
+            new Color(0.36f, 0.29f, 0.17f, 1f), // Brown dark
+            new Color(0.66f, 0.56f, 0.36f, 1f), // Brown light
+            new Color(0.62f, 0.52f, 0.33f, 1f), // Brown medium
+            new Color(0.55f, 0.45f, 0.28f, 1f), // Brown warm
+            new Color(0.36f, 0.29f, 0.17f, 1f), // Brown dark
+            new Color(0.62f, 0.52f, 0.33f, 1f), // Brown medium
+            new Color(0.55f, 0.45f, 0.28f, 1f), // Brown warm = 15 browns (75%)
             new Color(0.00f, 0.35f, 0.44f, 1f), // Aquamarine #005a70
-            new Color(0.27f, 0.53f, 0.60f, 1f), // Aqua light #448899 = 10%
+            new Color(0.27f, 0.53f, 0.60f, 1f), // Aqua light #448899 = 2 aqua (10%)
             new Color(1f, 1f, 1f, 1f),           // White
             new Color(1f, 1f, 1f, 1f),           // White
-            new Color(1f, 1f, 1f, 1f)            // White = 15%
+            new Color(1f, 1f, 1f, 1f)            // White = 3 white (15%)
         },
         new Color[] { new Color(1f, 0.78f, 0.3f, 1f) },                             // 2 Desert - yellow/orange
         new Color[] { new Color(0.45f, 0.62f, 1f, 1f),                              // 3 Techno - mostly blue,
