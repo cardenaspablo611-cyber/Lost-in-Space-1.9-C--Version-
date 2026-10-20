@@ -56,8 +56,8 @@ public class RectangleAdministrator : MonoBehaviour {
             // Lerp the position based on the acceleration factor
             transform.position = Vector3.Lerp(start, end, accelerationFactor);
 
-            // Increment the elapsed time
-            elapsedTime += Time.deltaTime;
+            // Increment the elapsed time - use unscaled time so doors work at timeScale 0
+            elapsedTime += Time.unscaledDeltaTime;
 
             // Wait for the next frame
             yield return null;

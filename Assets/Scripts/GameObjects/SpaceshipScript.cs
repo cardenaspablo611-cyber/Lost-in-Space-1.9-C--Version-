@@ -112,7 +112,13 @@ public class SpaceshipScript : MonoBehaviour {
     [HideInInspector] public bool Deadth { get { return deadth;}}
     [HideInInspector] public bool Immunity { get { return inmunity;}}
     private int livesFactor;
+    
+    // death //
     private bool deadth;
+    
+    // Death zoom target: fraction of original orthographic size (e.g. 0.6 = 60% zoom in)
+    // Tune this value to adjust death zoom amount. Smaller = more zoom. Range: 0.5-0.8 recommended.
+    [SerializeField] [Range(0.4f, 1.0f)] private float deathZoomTarget = 0.6f;
 
     private PanellAdminScript panell;
     private int amountPerDeadth = -100;
@@ -641,9 +647,10 @@ public class SpaceshipScript : MonoBehaviour {
         Debug.Log($"[DeathSeq] Camera size={originalOrthographicSize}, death shake intensity={deathShakeIntensity} units");
         
         // Zoom via camera orthographicSize (not container scaling)
-        float targetOrthographicSize = originalOrthographicSize * 0.6f; // Zoom to 60% of original view
+        // Use the serialized deathZoomTarget (default 0.6 = 60% zoom in)
+        float targetOrthographicSize = originalOrthographicSize * deathZoomTarget;
         
-        Debug.Log($"[DeathSeq] Will zoom from ortho={originalOrthographicSize} to {targetOrthographicSize}");
+        Debug.Log($"[DeathSeq] Will zoom from ortho={originalOrthographicSize} to {targetOrthographicSize} (target factor={deathZoomTarget})");
         
         float elapsedTime = 0f;
         float lastLogTime = 0f;
@@ -696,18 +703,35 @@ public class SpaceshipScript : MonoBehaviour {
         Time.timeScale = targetTimeScale;
         Time.fixedDeltaTime = originalFixedDeltaTime * 0.01f;
         
-        // Stop shake and restore camera
+        // Stop shake
         mainCamera.transform.position = originalMainCameraPosition;
         if (frameCamera != null) {
             frameCamera.transform.position = originalFrameCameraPosition;
         }
         
-        Debug.Log($"[DeathSeq] Slowdown complete, entering freeze hold");
+        Debug.Log($"[DeathSeq] Slowdown complete, entering freeze hold at timeScale 0, staying zoomed");
 
-        // Hold frozen frame
+        // Hold frozen frame (zoomed)
         yield return new WaitForSecondsRealtime(freezeHoldDuration);
-
-        // Restore camera zoom
+        
+        Debug.Log("[DeathSeq] Starting door close transition, keeping timeScale 0 and zoom");
+        
+        // Start door closing animation (doors use unscaled time)
+        ButtonController buttonController = GameObject.Find("ControlButtonFunctions")?.GetComponent<ButtonController>();
+        if (buttonController != null) {
+            // LoadScene starts door animation and waits 1.2s before switching
+            buttonController.StartCoroutine(buttonController.loadANewScene("GameOverMenu"));
+        } else {
+            Debug.LogError("[DeathSeq] ButtonController not found, cannot start door transition!");
+            yield break;
+        }
+        
+        // Wait for doors to fully close (1.2s as in ButtonController)
+        yield return new WaitForSecondsRealtime(1.2f);
+        
+        Debug.Log("[DeathSeq] Doors closed, restoring camera and timeScale behind them");
+        
+        // Restore camera zoom and timeScale behind closed doors (not visible anymore)
         mainCamera.orthographicSize = originalOrthographicSize;
         mainCamera.transform.position = originalMainCameraPosition;
         if (frameCamera != null) {
@@ -716,8 +740,8 @@ public class SpaceshipScript : MonoBehaviour {
         Time.timeScale = 1f;
         Time.fixedDeltaTime = originalFixedDeltaTime;
         
-        Debug.Log("[DeathSeq] END - Restored, loading GameOverMenu");
-
-        GameObject.Find("ControlButtonFunctions").GetComponent<ButtonController>().LoadScene("GameOverMenu");
+        Debug.Log("[DeathSeq] END - Restored behind doors, scene switch in progress");
+        
+        // Scene switch already started by LoadScene coroutine
     }    
 }
