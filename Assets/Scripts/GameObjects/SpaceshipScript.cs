@@ -414,6 +414,8 @@ public class SpaceshipScript : MonoBehaviour {
 
                     if (deadth) return;
                     
+                    Debug.Log("[DeathSeq] Ship dying - setting flags and disabling visuals");
+                    
                     // Set flags immediately to stop all game systems
                     deadth = true;
                     IsGameOver = true;
@@ -424,6 +426,25 @@ public class SpaceshipScript : MonoBehaviour {
                     if (shipCollider != null) {
                         shipCollider.enabled = false;
                     }
+                    
+                    // Disable all power-up visuals/effects
+                    shield = false;
+                    bullet = false;
+                    bulletExtra = false;
+                    upSideDown = false;
+                    bulletRush = false;
+                    inmunity = false;
+                    
+                    // Hide shield visual
+                    if (shieldChildObject != null) {
+                        shieldChildObject.SetActive(false);
+                    }
+                    
+                    // NOTE: Don't call StopAllCoroutines here as it would stop DamageScreenShake
+                    // which was just started above. Power-up coroutines will be stopped when
+                    // scene changes anyway.
+                    
+                    Debug.Log("[DeathSeq] Power-ups disabled and visuals hidden");
 
                     // Hide ship sprites
                     rightLeft.sprite = null;
@@ -437,10 +458,10 @@ public class SpaceshipScript : MonoBehaviour {
                         if (persistentScript != null) {
                             persistentScript.StartCoroutine(SlowMotionDeathSequence(transform.position, explosionPrefab));
                         } else {
-                            Debug.LogError("[SpaceshipScript] ButtonController not found!");
+                            Debug.LogError("[DeathSeq] ButtonController not found!");
                         }
                     } else {
-                        Debug.LogError("[SpaceshipScript] ControlButtonFunctions GameObject not found!");
+                        Debug.LogError("[DeathSeq] ControlButtonFunctions GameObject not found!");
                     }
 
                 } else if (!inmunity) {
@@ -510,13 +531,20 @@ public class SpaceshipScript : MonoBehaviour {
     }
 
     private IEnumerator DamageScreenShake() {
+        Debug.Log("[DmgShake] START - Damage screen shake triggered");
+        
         Camera mainCamera = Camera.main;
-        if (mainCamera == null) yield break;
+        if (mainCamera == null) {
+            Debug.LogWarning("[DmgShake] Camera.main is null!");
+            yield break;
+        }
         
         Vector3 originalPosition = mainCamera.transform.position;
         float duration = 0.2f; // Short shake
         float intensity = 0.8f; // Smaller than death shake
         float elapsed = 0f;
+        
+        Debug.Log($"[DmgShake] Starting shake: duration={duration}s, intensity={intensity}, origPos={originalPosition}");
         
         while (elapsed < duration) {
             elapsed += Time.unscaledDeltaTime;
@@ -534,11 +562,14 @@ public class SpaceshipScript : MonoBehaviour {
         }
         
         mainCamera.transform.position = originalPosition;
+        Debug.Log("[DmgShake] END - Shake complete, camera restored");
     }
 
     public static IEnumerator SlowMotionDeathSequence(Vector3 shipPosition, GameObject explosionPrefab) {
         // This coroutine runs on a persistent GameObject (ControlButtonFunctions)
         // so it won't stop if the ship is disabled
+        
+        Debug.Log("[DeathSeq] START - Death sequence beginning");
         
         // Instantiate green explosion at ship position
         GameObject explosion = Object.Instantiate(explosionPrefab) as GameObject;
@@ -556,41 +587,41 @@ public class SpaceshipScript : MonoBehaviour {
         float freezeHoldDuration = 0.4f;
 
         float originalFixedDeltaTime = Time.fixedDeltaTime;
-        float startTimeScale = Time.timeScale;
+        // CRITICAL: Game might be running at 200% speed (timeScale = 2.0)
+        // We want to slow from NORMAL speed (1.0) to 0, not from 200% to 0
+        float startTimeScale = Mathf.Min(Time.timeScale, 1.0f);
+        Debug.Log($"[DeathSeq] Captured timeScale: actual={Time.timeScale}, clamped start={startTimeScale}");
         
-        // Get the main camera for shake
+        // Get the main camera for shake AND zoom
         Camera mainCamera = Camera.main;
         if (mainCamera == null) {
-            Debug.LogError("[SpaceshipScript] Camera.main is null!");
+            Debug.LogError("[DeathSeq] Camera.main is null!");
             yield break;
         }
         
         Vector3 originalCameraPosition = mainCamera.transform.position;
+        float originalOrthographicSize = mainCamera.orthographicSize;
+        float targetOrthographicSize = originalOrthographicSize * 0.6f; // Zoom to 60% (smaller = more zoomed in)
         
-        // Get the Space - Parent GameObject for gameplay-only zoom
-        GameObject spaceParent = GameObject.Find("Space - Parent");
-        if (spaceParent == null) {
-            Debug.LogError("[SpaceshipScript] 'Space - Parent' GameObject not found!");
-            yield break;
-        }
-        
-        Vector3 originalSpaceScale = spaceParent.transform.localScale;
-        Vector3 originalSpacePosition = spaceParent.transform.position;
-        float targetZoomScale = 1.67f; // 1/0.6 = 1.67 to achieve 60% view (zooming in)
+        Debug.Log($"[DeathSeq] Camera setup: origSize={originalOrthographicSize}, targetSize={targetOrthographicSize}, origPos={originalCameraPosition}");
         
         // Camera shake parameters
         float shakeIntensity = 2.5f;
         float shakeDecayPower = 2f;
         
         float elapsedTime = 0f;
+        float lastLogTime = 0f;
 
         // Tell PanellAdminScript to stop its timeScale transitions
         PanellAdminScript panellAdmin = GameObject.Find("Panell Object")?.GetComponent<PanellAdminScript>();
         if (panellAdmin != null) {
             panellAdmin.StopTimeScaleTransitions();
+            Debug.Log("[DeathSeq] Stopped PanellAdmin timeScale transitions");
+        } else {
+            Debug.LogWarning("[DeathSeq] PanellAdmin not found!");
         }
 
-        // Slow down to complete freeze with camera shake and gameplay zoom
+        // Slow down to complete freeze with camera shake and zoom
         while (elapsedTime < slowdownDuration) {
             elapsedTime += Time.unscaledDeltaTime;
             float t = elapsedTime / slowdownDuration;
@@ -598,19 +629,17 @@ public class SpaceshipScript : MonoBehaviour {
             // Smoothstep ease (smooth start and end)
             float easedT = t * t * (3f - 2f * t);
             
-            // Update time scale
+            // Update time scale - gradually slow from start to 0
             Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, easedT);
             Time.fixedDeltaTime = originalFixedDeltaTime * Mathf.Max(Time.timeScale, 0.01f);
             
-            // Zoom the gameplay area (Space - Parent) by scaling it up
-            float currentScale = Mathf.Lerp(1f, targetZoomScale, easedT);
-            spaceParent.transform.localScale = originalSpaceScale * currentScale;
+            // Camera zoom (reduce orthographicSize to zoom in)
+            float currentSize = Mathf.Lerp(originalOrthographicSize, targetOrthographicSize, easedT);
+            mainCamera.orthographicSize = currentSize;
             
-            // Adjust Space - Parent position to keep ship centered as it scales
-            // When scaling, objects move away from origin, so we need to counteract that
-            Vector3 offset = shipPosition - originalSpacePosition;
-            Vector3 scaledOffset = offset * (currentScale - 1f);
-            spaceParent.transform.position = originalSpacePosition - scaledOffset;
+            // Move camera toward ship position
+            Vector3 targetCameraPos = new Vector3(shipPosition.x, shipPosition.y, originalCameraPosition.z);
+            Vector3 zoomedCameraPos = Vector3.Lerp(originalCameraPosition, targetCameraPos, easedT);
             
             // Camera shake (strongest at start, decaying over time)
             float shakeAmount = shakeIntensity * Mathf.Pow(1f - t, shakeDecayPower);
@@ -620,7 +649,13 @@ public class SpaceshipScript : MonoBehaviour {
                 0f
             );
             
-            mainCamera.transform.position = originalCameraPosition + shake;
+            mainCamera.transform.position = zoomedCameraPos + shake;
+            
+            // Log every 0.5 seconds
+            if (elapsedTime - lastLogTime >= 0.5f) {
+                Debug.Log($"[DeathSeq] t={t:F2} timeScale={Time.timeScale:F2} camSize={currentSize:F1} shake={shakeAmount:F2}");
+                lastLogTime = elapsedTime;
+            }
             
             yield return null;
         }
@@ -628,18 +663,21 @@ public class SpaceshipScript : MonoBehaviour {
         Time.timeScale = targetTimeScale;
         Time.fixedDeltaTime = originalFixedDeltaTime * 0.01f;
         
-        // Stop shake, keep gameplay zoom
-        mainCamera.transform.position = originalCameraPosition;
+        // Stop shake, keep zoom
+        mainCamera.transform.position = new Vector3(shipPosition.x, shipPosition.y, originalCameraPosition.z);
+        
+        Debug.Log($"[DeathSeq] Slowdown complete, entering freeze hold");
 
         // Hold frozen frame
         yield return new WaitForSecondsRealtime(freezeHoldDuration);
 
         // Restore everything
-        spaceParent.transform.localScale = originalSpaceScale;
-        spaceParent.transform.position = originalSpacePosition;
         mainCamera.transform.position = originalCameraPosition;
+        mainCamera.orthographicSize = originalOrthographicSize;
         Time.timeScale = 1f;
         Time.fixedDeltaTime = originalFixedDeltaTime;
+        
+        Debug.Log("[DeathSeq] END - Restored, loading GameOverMenu");
 
         GameObject.Find("ControlButtonFunctions").GetComponent<ButtonController>().LoadScene("GameOverMenu");
     }    
