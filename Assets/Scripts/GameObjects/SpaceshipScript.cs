@@ -676,9 +676,31 @@ public class SpaceshipScript : MonoBehaviour {
             Time.timeScale = Mathf.Lerp(startTimeScale, targetTimeScale, easedT);
             Time.fixedDeltaTime = originalFixedDeltaTime * Mathf.Max(Time.timeScale, 0.01f);
             
+            // Log timeScale every frame for verification
+            Debug.Log($"[DeathSeq] Frame t={t:F3} easedT={easedT:F3} TIME.TIMESCALE={Time.timeScale:F3}");
+            
             // Zoom gameplay camera via orthographicSize and move toward ship death position
             mainCamera.orthographicSize = Mathf.Lerp(originalOrthographicSize, targetOrthographicSize, easedT);
             Vector3 baseCameraPosition = Vector3.Lerp(originalMainCameraPosition, targetCameraPosition, easedT);
+            
+            // Clamp camera position so zoomed view stays inside original bounds
+            float currentHalfHeight = mainCamera.orthographicSize;
+            float currentHalfWidth = currentHalfHeight * mainCamera.aspect;
+            float originalHalfHeight = originalOrthographicSize;
+            float originalHalfWidth = originalHalfHeight * mainCamera.aspect;
+            
+            // Calculate max camera offset (how far camera can move without showing outside original bounds)
+            float maxOffsetX = originalHalfWidth - currentHalfWidth;
+            float maxOffsetY = originalHalfHeight - currentHalfHeight;
+            
+            // Clamp camera position
+            Vector3 clampedPosition = baseCameraPosition;
+            clampedPosition.x = Mathf.Clamp(baseCameraPosition.x, 
+                originalMainCameraPosition.x - maxOffsetX, 
+                originalMainCameraPosition.x + maxOffsetX);
+            clampedPosition.y = Mathf.Clamp(baseCameraPosition.y,
+                originalMainCameraPosition.y - maxOffsetY,
+                originalMainCameraPosition.y + maxOffsetY);
             
             // Screen shake (both cameras) - decays over time
             float shakeAmount = deathShakeIntensity * Mathf.Pow(1f - t, shakeDecayPower);
@@ -688,7 +710,7 @@ public class SpaceshipScript : MonoBehaviour {
                 0f
             );
             
-            mainCamera.transform.position = baseCameraPosition + shake;
+            mainCamera.transform.position = clampedPosition + shake;
             if (frameCamera != null) {
                 frameCamera.transform.position = originalFrameCameraPosition + shake;
             }
@@ -713,10 +735,51 @@ public class SpaceshipScript : MonoBehaviour {
         
         Debug.Log($"[DeathSeq] Slowdown complete, entering freeze hold at timeScale 0, staying zoomed");
 
-        // Hold frozen frame (zoomed)
-        yield return new WaitForSecondsRealtime(freezeHoldDuration);
+        // Create black fade overlay (on UI layer, rendered by Frame Camera)
+        GameObject fadeOverlay = new GameObject("DeathFadeOverlay");
+        fadeOverlay.layer = 5; // UI layer
+        Canvas canvas = fadeOverlay.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = frameCamera != null ? frameCamera : mainCamera;
+        canvas.sortingOrder = 1000; // On top of everything
         
-        Debug.Log("[DeathSeq] Starting door close transition, keeping timeScale 0 and zoom");
+        UnityEngine.UI.CanvasScaler scaler = fadeOverlay.AddComponent<UnityEngine.UI.CanvasScaler>();
+        scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        
+        GameObject blackPanel = new GameObject("BlackPanel");
+        blackPanel.transform.SetParent(fadeOverlay.transform, false);
+        blackPanel.layer = 5;
+        
+        UnityEngine.UI.Image image = blackPanel.AddComponent<UnityEngine.UI.Image>();
+        image.color = new Color(0, 0, 0, 0); // Start transparent
+        
+        RectTransform rect = blackPanel.GetComponent<RectTransform>();
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.sizeDelta = Vector2.zero;
+        rect.anchoredPosition = Vector2.zero;
+        
+        Debug.Log("[DeathSeq] Created black fade overlay, starting fade in");
+        
+        // Fade to black over freeze hold duration (0.4s)
+        float fadeDuration = 0.4f;
+        float fadeElapsed = 0f;
+        
+        while (fadeElapsed < freezeHoldDuration) {
+            fadeElapsed += Time.unscaledDeltaTime;
+            float fadeT = Mathf.Clamp01(fadeElapsed / fadeDuration);
+            if (image != null) {
+                image.color = new Color(0, 0, 0, fadeT);
+            }
+            yield return null;
+        }
+        
+        // Ensure fully black
+        if (image != null) {
+            image.color = Color.black;
+        }
+        
+        Debug.Log("[DeathSeq] Fade to black complete, starting door close transition");
         
         // Start door closing animation (doors use unscaled time)
         ButtonController buttonController = GameObject.Find("ControlButtonFunctions")?.GetComponent<ButtonController>();
